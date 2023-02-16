@@ -8,9 +8,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/spiffe/go-spiffe/v2/internal/test"
-	"github.com/spiffe/go-spiffe/v2/internal/test/fakeworkloadapi"
 	"github.com/stretchr/testify/require"
+	"github.com/vishnusomank/go-spiffe/v2/internal/test"
+	"github.com/vishnusomank/go-spiffe/v2/internal/test/fakeworkloadapi"
 )
 
 func TestWithNamedPipeName(t *testing.T) {

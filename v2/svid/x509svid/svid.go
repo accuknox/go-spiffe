@@ -7,9 +7,9 @@ import (
 	"crypto/x509"
 	"io/ioutil"
 
-	"github.com/spiffe/go-spiffe/v2/internal/pemutil"
-	"github.com/spiffe/go-spiffe/v2/internal/x509util"
 	"github.com/spiffe/go-spiffe/v2/spiffeid"
+	"github.com/vishnusomank/go-spiffe/v2/internal/pemutil"
+	"github.com/vishnusomank/go-spiffe/v2/internal/x509util"
 	"github.com/zeebo/errs"
 )
 
