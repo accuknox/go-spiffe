@@ -5,11 +5,11 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/spiffe/go-spiffe/v2/bundle/spiffebundle"
-	"github.com/spiffe/go-spiffe/v2/federation"
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
-	"github.com/spiffe/go-spiffe/v2/spiffetls/tlsconfig"
-	"github.com/spiffe/go-spiffe/v2/workloadapi"
+	"github.com/vishnusomank/go-spiffe/v2/bundle/spiffebundle"
+	"github.com/vishnusomank/go-spiffe/v2/federation"
+	"github.com/vishnusomank/go-spiffe/v2/spiffeid"
+	"github.com/vishnusomank/go-spiffe/v2/spiffetls/tlsconfig"
+	"github.com/vishnusomank/go-spiffe/v2/workloadapi"
 )
 
 func ExampleFetchBundle_webPKI() {

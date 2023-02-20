@@ -11,12 +11,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/spiffe/go-spiffe/v2/bundle/spiffebundle"
-	"github.com/spiffe/go-spiffe/v2/spiffetls/tlsconfig"
-	"github.com/spiffe/go-spiffe/v2/svid/x509svid"
 	"github.com/stretchr/testify/assert"
+	"github.com/vishnusomank/go-spiffe/v2/bundle/spiffebundle"
 	"github.com/vishnusomank/go-spiffe/v2/internal/test"
 	"github.com/vishnusomank/go-spiffe/v2/internal/x509util"
+	"github.com/vishnusomank/go-spiffe/v2/spiffetls/tlsconfig"
+	"github.com/vishnusomank/go-spiffe/v2/svid/x509svid"
 )
 
 type Server struct {

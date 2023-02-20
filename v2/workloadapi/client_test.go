@@ -7,16 +7,16 @@ import (
 	"testing"
 	"time"
 
-	"github.com/spiffe/go-spiffe/v2/bundle/jwtbundle"
-	"github.com/spiffe/go-spiffe/v2/bundle/x509bundle"
-	"github.com/spiffe/go-spiffe/v2/proto/spiffe/workload"
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
-	"github.com/spiffe/go-spiffe/v2/svid/jwtsvid"
-	"github.com/spiffe/go-spiffe/v2/svid/x509svid"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"github.com/vishnusomank/go-spiffe/v2/bundle/jwtbundle"
+	"github.com/vishnusomank/go-spiffe/v2/bundle/x509bundle"
 	"github.com/vishnusomank/go-spiffe/v2/internal/test"
 	"github.com/vishnusomank/go-spiffe/v2/internal/test/fakeworkloadapi"
+	"github.com/vishnusomank/go-spiffe/v2/proto/spiffe/workload"
+	"github.com/vishnusomank/go-spiffe/v2/spiffeid"
+	"github.com/vishnusomank/go-spiffe/v2/svid/jwtsvid"
+	"github.com/vishnusomank/go-spiffe/v2/svid/x509svid"
 )
 
 var (
@@ -31,7 +31,7 @@ func TestFetchX509SVID(t *testing.T) {
 	ca := test.NewCA(t, td)
 	wl := fakeworkloadapi.New(t)
 	defer wl.Stop()
-	c, err := New(context.Background(), WithAddr(wl.Addr()))
+	c, err := New(context.Background(), map[string]string{}, WithAddr(wl.Addr()))
 	require.NoError(t, err)
 	defer c.Close()
 
@@ -41,7 +41,7 @@ func TestFetchX509SVID(t *testing.T) {
 	}
 
 	wl.SetX509SVIDResponse(resp)
-	svid, err := c.FetchX509SVID(context.Background())
+	svid, err := c.FetchX509SVID(context.Background(), map[string]string{})
 
 	require.NoError(t, err)
 	assertX509SVID(t, svid, fooID, resp.SVIDs[0].Certificates)
@@ -51,7 +51,7 @@ func TestFetchX509SVIDs(t *testing.T) {
 	ca := test.NewCA(t, td)
 	wl := fakeworkloadapi.New(t)
 	defer wl.Stop()
-	c, err := New(context.Background(), WithAddr(wl.Addr()))
+	c, err := New(context.Background(), map[string]string{}, WithAddr(wl.Addr()))
 	require.NoError(t, err)
 	defer c.Close()
 
@@ -61,7 +61,7 @@ func TestFetchX509SVIDs(t *testing.T) {
 	}
 	wl.SetX509SVIDResponse(resp)
 
-	svids, err := c.FetchX509SVIDs(context.Background())
+	svids, err := c.FetchX509SVIDs(context.Background(), map[string]string{})
 
 	require.NoError(t, err)
 	require.Len(t, svids, 2)
@@ -74,7 +74,7 @@ func TestFetchX509Bundles(t *testing.T) {
 	federatedCA := test.NewCA(t, federatedTD)
 	wl := fakeworkloadapi.New(t)
 	defer wl.Stop()
-	c, err := New(context.Background(), WithAddr(wl.Addr()))
+	c, err := New(context.Background(), map[string]string{}, WithAddr(wl.Addr()))
 	require.NoError(t, err)
 	defer c.Close()
 
@@ -91,7 +91,7 @@ func TestFetchX509Bundles(t *testing.T) {
 func TestWatchX509Bundles(t *testing.T) {
 	wl := fakeworkloadapi.New(t)
 	defer wl.Stop()
-	c, err := New(context.Background(), WithAddr(wl.Addr()))
+	c, err := New(context.Background(), map[string]string{}, WithAddr(wl.Addr()))
 	require.NoError(t, err)
 	defer c.Close()
 
@@ -144,7 +144,7 @@ func TestFetchX509Context(t *testing.T) {
 	federatedCA := test.NewCA(t, federatedTD)
 	wl := fakeworkloadapi.New(t)
 	defer wl.Stop()
-	c, err := New(context.Background(), WithAddr(wl.Addr()))
+	c, err := New(context.Background(), map[string]string{}, WithAddr(wl.Addr()))
 	require.NoError(t, err)
 	defer c.Close()
 
@@ -187,7 +187,7 @@ func TestWatchX509Context(t *testing.T) {
 	federatedCA := test.NewCA(t, federatedTD)
 	wl := fakeworkloadapi.New(t)
 	defer wl.Stop()
-	c, err := New(context.Background(), WithAddr(wl.Addr()))
+	c, err := New(context.Background(), map[string]string{}, WithAddr(wl.Addr()))
 	require.NoError(t, err)
 	defer c.Close()
 
@@ -260,7 +260,7 @@ func TestFetchJWTSVID(t *testing.T) {
 	ca := test.NewCA(t, td)
 	wl := fakeworkloadapi.New(t)
 	defer wl.Stop()
-	c, _ := New(context.Background(), WithAddr(wl.Addr()))
+	c, _ := New(context.Background(), map[string]string{}, WithAddr(wl.Addr()))
 	defer c.Close()
 
 	subjectID := spiffeid.RequireFromPath(td, "/subject")
@@ -286,7 +286,7 @@ func TestFetchJWTSVIDs(t *testing.T) {
 	ca := test.NewCA(t, td)
 	wl := fakeworkloadapi.New(t)
 	defer wl.Stop()
-	c, _ := New(context.Background(), WithAddr(wl.Addr()))
+	c, _ := New(context.Background(), map[string]string{}, WithAddr(wl.Addr()))
 	defer c.Close()
 
 	subjectID := spiffeid.RequireFromPath(td, "/subject")
@@ -315,7 +315,7 @@ func TestFetchJWTBundles(t *testing.T) {
 	ca := test.NewCA(t, td)
 	wl := fakeworkloadapi.New(t)
 	defer wl.Stop()
-	c, err := New(context.Background(), WithAddr(wl.Addr()))
+	c, err := New(context.Background(), map[string]string{}, WithAddr(wl.Addr()))
 	require.NoError(t, err)
 	defer c.Close()
 
@@ -330,7 +330,7 @@ func TestFetchJWTBundles(t *testing.T) {
 func TestWatchJWTBundles(t *testing.T) {
 	wl := fakeworkloadapi.New(t)
 	defer wl.Stop()
-	c, err := New(context.Background(), WithAddr(wl.Addr()))
+	c, err := New(context.Background(), map[string]string{}, WithAddr(wl.Addr()))
 	require.NoError(t, err)
 	defer c.Close()
 
@@ -382,7 +382,7 @@ func TestValidateJWTSVID(t *testing.T) {
 	ca := test.NewCA(t, td)
 	wl := fakeworkloadapi.New(t)
 	defer wl.Stop()
-	c, err := New(context.Background(), WithAddr(wl.Addr()))
+	c, err := New(context.Background(), map[string]string{}, WithAddr(wl.Addr()))
 	require.NoError(t, err)
 	defer c.Close()
 

@@ -4,9 +4,9 @@ import (
 	"context"
 	"sync"
 
-	"github.com/spiffe/go-spiffe/v2/bundle/jwtbundle"
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
-	"github.com/spiffe/go-spiffe/v2/svid/jwtsvid"
+	"github.com/vishnusomank/go-spiffe/v2/bundle/jwtbundle"
+	"github.com/vishnusomank/go-spiffe/v2/spiffeid"
+	"github.com/vishnusomank/go-spiffe/v2/svid/jwtsvid"
 	"github.com/zeebo/errs"
 )
 
@@ -35,7 +35,7 @@ func NewJWTSource(ctx context.Context, options ...JWTSourceOption) (_ *JWTSource
 
 	s := &JWTSource{}
 
-	s.watcher, err = newWatcher(ctx, config.watcher, nil, s.setJWTBundles)
+	s.watcher, err = newWatcher(ctx, config.watcher, map[string]string{}, nil, s.setJWTBundles)
 	if err != nil {
 		return nil, err
 	}

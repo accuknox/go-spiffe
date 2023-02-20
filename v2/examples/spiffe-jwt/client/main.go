@@ -9,10 +9,10 @@ import (
 	"os"
 	"time"
 
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
-	"github.com/spiffe/go-spiffe/v2/spiffetls/tlsconfig"
-	"github.com/spiffe/go-spiffe/v2/svid/jwtsvid"
-	"github.com/spiffe/go-spiffe/v2/workloadapi"
+	"github.com/vishnusomank/go-spiffe/v2/spiffeid"
+	"github.com/vishnusomank/go-spiffe/v2/spiffetls/tlsconfig"
+	"github.com/vishnusomank/go-spiffe/v2/svid/jwtsvid"
+	"github.com/vishnusomank/go-spiffe/v2/workloadapi"
 )
 
 const (

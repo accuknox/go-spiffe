@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/spiffe/go-spiffe/v2/bundle/spiffebundle"
-	"github.com/spiffe/go-spiffe/v2/logger"
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
+	"github.com/vishnusomank/go-spiffe/v2/bundle/spiffebundle"
+	"github.com/vishnusomank/go-spiffe/v2/logger"
+	"github.com/vishnusomank/go-spiffe/v2/spiffeid"
 )
 
 type HandlerOption interface {

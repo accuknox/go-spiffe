@@ -4,9 +4,9 @@ import (
 	"context"
 	"sync"
 
-	"github.com/spiffe/go-spiffe/v2/bundle/x509bundle"
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
-	"github.com/spiffe/go-spiffe/v2/svid/x509svid"
+	"github.com/vishnusomank/go-spiffe/v2/bundle/x509bundle"
+	"github.com/vishnusomank/go-spiffe/v2/spiffeid"
+	"github.com/vishnusomank/go-spiffe/v2/svid/x509svid"
 	"github.com/zeebo/errs"
 )
 
@@ -39,7 +39,7 @@ func NewX509Source(ctx context.Context, options ...X509SourceOption) (_ *X509Sou
 		picker: config.picker,
 	}
 
-	s.watcher, err = newWatcher(ctx, config.watcher, s.setX509Context, nil)
+	s.watcher, err = newWatcher(ctx, config.watcher, map[string]string{}, s.setX509Context, nil)
 	if err != nil {
 		return nil, err
 	}

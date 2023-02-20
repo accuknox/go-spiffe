@@ -7,13 +7,13 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/spiffe/go-spiffe/v2/bundle/jwtbundle"
-	"github.com/spiffe/go-spiffe/v2/bundle/x509bundle"
-	"github.com/spiffe/go-spiffe/v2/logger"
-	"github.com/spiffe/go-spiffe/v2/proto/spiffe/workload"
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
-	"github.com/spiffe/go-spiffe/v2/svid/jwtsvid"
-	"github.com/spiffe/go-spiffe/v2/svid/x509svid"
+	"github.com/vishnusomank/go-spiffe/v2/bundle/jwtbundle"
+	"github.com/vishnusomank/go-spiffe/v2/bundle/x509bundle"
+	"github.com/vishnusomank/go-spiffe/v2/logger"
+	"github.com/vishnusomank/go-spiffe/v2/proto/spiffe/workload"
+	"github.com/vishnusomank/go-spiffe/v2/spiffeid"
+	"github.com/vishnusomank/go-spiffe/v2/svid/jwtsvid"
+	"github.com/vishnusomank/go-spiffe/v2/svid/x509svid"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
@@ -31,7 +31,7 @@ type Client struct {
 
 // New dials the Workload API and returns a client. The client should be closed
 // when no longer in use to free underlying resources.
-func New(ctx context.Context, options ...ClientOption) (*Client, error) {
+func New(ctx context.Context, meta map[string]string, options ...ClientOption) (*Client, error) {
 	c := &Client{
 		config: defaultClientConfig(),
 	}
@@ -60,11 +60,11 @@ func (c *Client) Close() error {
 
 // FetchX509SVID fetches the default X509-SVID, i.e. the first in the list
 // returned by the Workload API.
-func (c *Client) FetchX509SVID(ctx context.Context) (*x509svid.SVID, error) {
+func (c *Client) FetchX509SVID(ctx context.Context, meta map[string]string) (*x509svid.SVID, error) {
 	ctx, cancel := context.WithCancel(withHeader(ctx))
 	defer cancel()
 
-	stream, err := c.wlClient.FetchX509SVID(ctx, &workload.X509SVIDRequest{})
+	stream, err := c.wlClient.FetchX509SVID(ctx, &workload.X509SVIDRequest{Meta: meta})
 	if err != nil {
 		return nil, err
 	}
@@ -83,11 +83,11 @@ func (c *Client) FetchX509SVID(ctx context.Context) (*x509svid.SVID, error) {
 }
 
 // FetchX509SVIDs fetches all X509-SVIDs.
-func (c *Client) FetchX509SVIDs(ctx context.Context) ([]*x509svid.SVID, error) {
+func (c *Client) FetchX509SVIDs(ctx context.Context, meta map[string]string) ([]*x509svid.SVID, error) {
 	ctx, cancel := context.WithCancel(withHeader(ctx))
 	defer cancel()
 
-	stream, err := c.wlClient.FetchX509SVID(ctx, &workload.X509SVIDRequest{})
+	stream, err := c.wlClient.FetchX509SVID(ctx, &workload.X509SVIDRequest{Meta: meta})
 	if err != nil {
 		return nil, err
 	}

@@ -5,9 +5,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/spiffe/go-spiffe/v2/bundle/spiffebundle"
-	"github.com/spiffe/go-spiffe/v2/federation"
 	"github.com/stretchr/testify/assert"
+	"github.com/vishnusomank/go-spiffe/v2/bundle/spiffebundle"
+	"github.com/vishnusomank/go-spiffe/v2/federation"
 	"github.com/vishnusomank/go-spiffe/v2/internal/test"
 	"github.com/vishnusomank/go-spiffe/v2/internal/test/fakebundleendpoint"
 )

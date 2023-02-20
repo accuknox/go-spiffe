@@ -10,11 +10,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/spiffe/go-spiffe/v2/bundle/spiffebundle"
-	"github.com/spiffe/go-spiffe/v2/federation"
-	"github.com/spiffe/go-spiffe/v2/logger"
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
 	"github.com/stretchr/testify/require"
+	"github.com/vishnusomank/go-spiffe/v2/bundle/spiffebundle"
+	"github.com/vishnusomank/go-spiffe/v2/federation"
+	"github.com/vishnusomank/go-spiffe/v2/logger"
+	"github.com/vishnusomank/go-spiffe/v2/spiffeid"
 )
 
 const jwks = `{

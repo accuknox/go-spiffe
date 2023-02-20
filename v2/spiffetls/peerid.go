@@ -4,8 +4,8 @@ import (
 	"crypto/tls"
 	"net"
 
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
-	"github.com/spiffe/go-spiffe/v2/svid/x509svid"
+	"github.com/vishnusomank/go-spiffe/v2/spiffeid"
+	"github.com/vishnusomank/go-spiffe/v2/svid/x509svid"
 )
 
 type PeerIDGetter interface {

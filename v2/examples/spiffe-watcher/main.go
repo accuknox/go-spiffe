@@ -7,8 +7,8 @@ import (
 	"os/signal"
 	"sync"
 
-	"github.com/spiffe/go-spiffe/v2/bundle/jwtbundle"
-	"github.com/spiffe/go-spiffe/v2/workloadapi"
+	"github.com/vishnusomank/go-spiffe/v2/bundle/jwtbundle"
+	"github.com/vishnusomank/go-spiffe/v2/workloadapi"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
@@ -30,7 +30,7 @@ func startWatchers(ctx context.Context) {
 
 	// Creates a new Workload API client, connecting to provided socket path
 	// Environment variable `SPIFFE_ENDPOINT_SOCKET` is used as default
-	client, err := workloadapi.New(ctx, workloadapi.WithAddr(socketPath))
+	client, err := workloadapi.New(ctx, map[string]string{}, workloadapi.WithAddr(socketPath))
 	if err != nil {
 		log.Fatalf("Unable to create workload API client: %v", err)
 	}

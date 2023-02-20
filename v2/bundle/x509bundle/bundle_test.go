@@ -6,12 +6,12 @@ import (
 	"os"
 	"testing"
 
-	"github.com/spiffe/go-spiffe/v2/bundle/x509bundle"
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"github.com/vishnusomank/go-spiffe/v2/bundle/x509bundle"
 	"github.com/vishnusomank/go-spiffe/v2/internal/pemutil"
 	"github.com/vishnusomank/go-spiffe/v2/internal/test"
+	"github.com/vishnusomank/go-spiffe/v2/spiffeid"
 )
 
 var (

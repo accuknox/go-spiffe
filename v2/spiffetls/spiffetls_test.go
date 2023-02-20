@@ -14,15 +14,15 @@ import (
 	"testing"
 	"time"
 
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
-	"github.com/spiffe/go-spiffe/v2/spiffetls"
-	"github.com/spiffe/go-spiffe/v2/spiffetls/tlsconfig"
-	"github.com/spiffe/go-spiffe/v2/svid/x509svid"
-	"github.com/spiffe/go-spiffe/v2/workloadapi"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"github.com/vishnusomank/go-spiffe/v2/internal/test"
 	"github.com/vishnusomank/go-spiffe/v2/internal/test/fakeworkloadapi"
+	"github.com/vishnusomank/go-spiffe/v2/spiffeid"
+	"github.com/vishnusomank/go-spiffe/v2/spiffetls"
+	"github.com/vishnusomank/go-spiffe/v2/spiffetls/tlsconfig"
+	"github.com/vishnusomank/go-spiffe/v2/svid/x509svid"
+	"github.com/vishnusomank/go-spiffe/v2/workloadapi"
 )
 
 const (
@@ -499,7 +499,7 @@ func setupTestEnv(t *testing.T) (*testEnv, func()) {
 	// Create custom workload API sources for the server
 	wlCtx, wlCancel := context.WithTimeout(context.Background(), time.Second*5)
 	testEnv.wlCancel = wlCancel
-	testEnv.wlAPIClientA, testEnv.err = workloadapi.New(wlCtx, workloadapi.WithAddr(testEnv.wlAPIServerA.Addr()))
+	testEnv.wlAPIClientA, testEnv.err = workloadapi.New(wlCtx, map[string]string{}, workloadapi.WithAddr(testEnv.wlAPIServerA.Addr()))
 	if testEnv.err != nil {
 		cleanup()
 	}
@@ -509,7 +509,7 @@ func setupTestEnv(t *testing.T) (*testEnv, func()) {
 	}
 
 	// Create custom workload API sources for the client
-	testEnv.wlAPIClientB, testEnv.err = workloadapi.New(wlCtx, workloadapi.WithAddr(testEnv.wlAPIServerB.Addr()))
+	testEnv.wlAPIClientB, testEnv.err = workloadapi.New(wlCtx, map[string]string{}, workloadapi.WithAddr(testEnv.wlAPIServerB.Addr()))
 	if testEnv.err != nil {
 		cleanup()
 	}

@@ -5,10 +5,10 @@ import (
 	"crypto/x509"
 	"testing"
 
-	"github.com/spiffe/go-spiffe/v2/bundle/jwtbundle"
-	"github.com/spiffe/go-spiffe/v2/bundle/spiffebundle"
-	"github.com/spiffe/go-spiffe/v2/bundle/x509bundle"
 	"github.com/stretchr/testify/require"
+	"github.com/vishnusomank/go-spiffe/v2/bundle/jwtbundle"
+	"github.com/vishnusomank/go-spiffe/v2/bundle/spiffebundle"
+	"github.com/vishnusomank/go-spiffe/v2/bundle/x509bundle"
 )
 
 var (

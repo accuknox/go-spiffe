@@ -6,9 +6,9 @@ import (
 	"io/ioutil"
 	"sync"
 
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
 	"github.com/vishnusomank/go-spiffe/v2/internal/pemutil"
 	"github.com/vishnusomank/go-spiffe/v2/internal/x509util"
+	"github.com/vishnusomank/go-spiffe/v2/spiffeid"
 	"github.com/zeebo/errs"
 )
 

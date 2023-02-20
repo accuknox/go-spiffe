@@ -4,8 +4,8 @@ import (
 	"context"
 	"sync"
 
-	"github.com/spiffe/go-spiffe/v2/bundle/jwtbundle"
-	"github.com/spiffe/go-spiffe/v2/svid/jwtsvid"
+	"github.com/vishnusomank/go-spiffe/v2/bundle/jwtbundle"
+	"github.com/vishnusomank/go-spiffe/v2/svid/jwtsvid"
 	"github.com/zeebo/errs"
 )
 
@@ -44,7 +44,7 @@ type watcher struct {
 	jwtBundlesSetOnce sync.Once
 }
 
-func newWatcher(ctx context.Context, config watcherConfig, x509ContextFn func(*X509Context), jwtBundlesFn func(*jwtbundle.Set)) (_ *watcher, err error) {
+func newWatcher(ctx context.Context, config watcherConfig, meta map[string]string, x509ContextFn func(*X509Context), jwtBundlesFn func(*jwtbundle.Set)) (_ *watcher, err error) {
 	w := &watcher{
 		updatedCh:      make(chan struct{}, 1),
 		client:         config.client,
@@ -64,7 +64,7 @@ func newWatcher(ctx context.Context, config watcherConfig, x509ContextFn func(*X
 
 	// Initialize a new client unless one is provided by the options
 	if w.client == nil {
-		client, err := New(ctx, config.clientOptions...)
+		client, err := New(ctx, meta, config.clientOptions...)
 		if err != nil {
 			return nil, err
 		}

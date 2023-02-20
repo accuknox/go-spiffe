@@ -3,13 +3,13 @@ package workloadapi_test
 import (
 	"context"
 
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
-	"github.com/spiffe/go-spiffe/v2/svid/jwtsvid"
-	"github.com/spiffe/go-spiffe/v2/workloadapi"
+	"github.com/vishnusomank/go-spiffe/v2/spiffeid"
+	"github.com/vishnusomank/go-spiffe/v2/svid/jwtsvid"
+	"github.com/vishnusomank/go-spiffe/v2/workloadapi"
 )
 
 func ExampleFetchX509SVID() {
-	svid, err := workloadapi.FetchX509SVID(context.TODO())
+	svid, err := workloadapi.FetchX509SVID(context.TODO(), map[string]string{})
 	if err != nil {
 		// TODO: error handling
 	}
@@ -26,7 +26,7 @@ func ExampleFetchJWTSVID() {
 
 	svid, err := workloadapi.FetchJWTSVID(context.TODO(), jwtsvid.Params{
 		Audience: serverID.String(),
-	})
+	}, map[string]string{})
 	if err != nil {
 		// TODO: error handling
 	}
@@ -42,7 +42,7 @@ func ExampleValidateJWTSVID() {
 	}
 
 	token := "TODO"
-	svid, err := workloadapi.ValidateJWTSVID(context.TODO(), token, serverID.String())
+	svid, err := workloadapi.ValidateJWTSVID(context.TODO(), token, serverID.String(), map[string]string{})
 	if err != nil {
 		// TODO: error handling
 	}

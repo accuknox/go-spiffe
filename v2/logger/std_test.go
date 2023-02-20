@@ -5,8 +5,8 @@ import (
 	"log"
 	"testing"
 
-	"github.com/spiffe/go-spiffe/v2/logger"
 	"github.com/stretchr/testify/require"
+	"github.com/vishnusomank/go-spiffe/v2/logger"
 )
 
 func TestStd(t *testing.T) {

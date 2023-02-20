@@ -6,10 +6,10 @@ import (
 	"crypto/x509"
 	"sync"
 
-	"github.com/spiffe/go-spiffe/v2/bundle/jwtbundle"
-	"github.com/spiffe/go-spiffe/v2/bundle/spiffebundle"
-	"github.com/spiffe/go-spiffe/v2/bundle/x509bundle"
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
+	"github.com/vishnusomank/go-spiffe/v2/bundle/jwtbundle"
+	"github.com/vishnusomank/go-spiffe/v2/bundle/spiffebundle"
+	"github.com/vishnusomank/go-spiffe/v2/bundle/x509bundle"
+	"github.com/vishnusomank/go-spiffe/v2/spiffeid"
 	"github.com/zeebo/errs"
 )
 
@@ -41,7 +41,7 @@ func NewBundleSource(ctx context.Context, options ...BundleSourceOption) (_ *Bun
 		jwtAuthorities:  make(map[spiffeid.TrustDomain]map[string]crypto.PublicKey),
 	}
 
-	s.watcher, err = newWatcher(ctx, config.watcher, s.setX509Context, s.setJWTBundles)
+	s.watcher, err = newWatcher(ctx, config.watcher, map[string]string{}, s.setX509Context, s.setJWTBundles)
 	if err != nil {
 		return nil, err
 	}
