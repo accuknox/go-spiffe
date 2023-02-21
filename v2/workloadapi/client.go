@@ -101,11 +101,11 @@ func (c *Client) FetchX509SVIDs(ctx context.Context, meta map[string]string) ([]
 }
 
 // FetchX509Bundles fetches the X.509 bundles.
-func (c *Client) FetchX509Bundles(ctx context.Context) (*x509bundle.Set, error) {
+func (c *Client) FetchX509Bundles(ctx context.Context, meta map[string]string) (*x509bundle.Set, error) {
 	ctx, cancel := context.WithCancel(withHeader(ctx))
 	defer cancel()
 
-	stream, err := c.wlClient.FetchX509Bundles(ctx, &workload.X509BundlesRequest{})
+	stream, err := c.wlClient.FetchX509Bundles(ctx, &workload.X509BundlesRequest{Meta: meta})
 	if err != nil {
 		return nil, err
 	}

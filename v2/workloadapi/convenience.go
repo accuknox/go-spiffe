@@ -37,7 +37,7 @@ func FetchX509Bundles(ctx context.Context, meta map[string]string, options ...Cl
 		return nil, err
 	}
 	defer c.Close()
-	return c.FetchX509Bundles(ctx)
+	return c.FetchX509Bundles(ctx, meta)
 }
 
 // FetchX509Context fetches the X.509 context, which contains both X509-SVIDs

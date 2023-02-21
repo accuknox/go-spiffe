@@ -80,7 +80,7 @@ func TestFetchX509Bundles(t *testing.T) {
 
 	wl.SetX509Bundles(ca.X509Bundle(), federatedCA.X509Bundle())
 
-	bundles, err := c.FetchX509Bundles(context.Background())
+	bundles, err := c.FetchX509Bundles(context.Background(), map[string]string{})
 
 	require.NoError(t, err)
 	assert.Equal(t, 2, bundles.Len())

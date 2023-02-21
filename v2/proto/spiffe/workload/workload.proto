@@ -81,6 +81,7 @@ message X509SVID {
 // The X509BundlesRequest message conveys parameters for requesting X.509
 // bundles. There are currently no such parameters.
 message X509BundlesRequest {
+    map<string,string> meta = 1;
 }
 
 // The X509BundlesResponse message carries a set of global CRLs and a map of
