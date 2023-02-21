@@ -27,6 +27,7 @@ type Client struct {
 	conn     *grpc.ClientConn
 	wlClient workload.SpiffeWorkloadAPIClient
 	config   clientConfig
+	meta     map[string]string
 }
 
 // New dials the Workload API and returns a client. The client should be closed
@@ -34,7 +35,9 @@ type Client struct {
 func New(ctx context.Context, meta map[string]string, options ...ClientOption) (*Client, error) {
 	c := &Client{
 		config: defaultClientConfig(),
+		meta:   meta,
 	}
+
 	for _, opt := range options {
 		opt.configureClient(&c.config)
 	}
@@ -287,7 +290,7 @@ func (c *Client) watchX509Context(ctx context.Context, watcher X509ContextWatche
 	defer cancel()
 
 	c.config.log.Debugf("Watching X.509 contexts")
-	stream, err := c.wlClient.FetchX509SVID(ctx, &workload.X509SVIDRequest{})
+	stream, err := c.wlClient.FetchX509SVID(ctx, &workload.X509SVIDRequest{Meta: c.meta})
 	if err != nil {
 		return err
 	}
