@@ -5,14 +5,14 @@ import (
 	"testing"
 	"time"
 
+	"github.com/accuknox/go-spiffe/v2/bundle/x509bundle"
+	"github.com/accuknox/go-spiffe/v2/internal/test"
+	"github.com/accuknox/go-spiffe/v2/internal/test/fakeworkloadapi"
+	"github.com/accuknox/go-spiffe/v2/spiffeid"
+	"github.com/accuknox/go-spiffe/v2/svid/x509svid"
+	"github.com/accuknox/go-spiffe/v2/workloadapi"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/vishnusomank/go-spiffe/v2/bundle/x509bundle"
-	"github.com/vishnusomank/go-spiffe/v2/internal/test"
-	"github.com/vishnusomank/go-spiffe/v2/internal/test/fakeworkloadapi"
-	"github.com/vishnusomank/go-spiffe/v2/spiffeid"
-	"github.com/vishnusomank/go-spiffe/v2/svid/x509svid"
-	"github.com/vishnusomank/go-spiffe/v2/workloadapi"
 )
 
 func TestX509SourceDoesNotReturnUntilInitialUpdate(t *testing.T) {
@@ -25,7 +25,7 @@ func TestX509SourceDoesNotReturnUntilInitialUpdate(t *testing.T) {
 	defer cancel()
 
 	// Create the source. It will wait for the initial response.
-	source, err := workloadapi.NewX509Source(ctx, withAddr(api))
+	source, err := workloadapi.NewX509Source(ctx, nil, withAddr(api))
 	if !assert.EqualError(t, err, context.DeadlineExceeded.Error()) {
 		source.Close()
 	}
@@ -49,7 +49,7 @@ func TestX509SourceFailsCallsIfClosed(t *testing.T) {
 	})
 
 	// Create the source. It will wait for the initial response.
-	source, err := workloadapi.NewX509Source(ctx, withAddr(api))
+	source, err := workloadapi.NewX509Source(ctx, nil, withAddr(api))
 	require.NoError(t, err)
 
 	// Close the source
@@ -88,7 +88,7 @@ func TestX509SourceGetsUpdates(t *testing.T) {
 	})
 
 	// Create the source. It will wait for the initial response.
-	source, err := workloadapi.NewX509Source(ctx, withAddr(api))
+	source, err := workloadapi.NewX509Source(ctx, nil, withAddr(api))
 	require.NoError(t, err)
 	defer func() {
 		assert.NoError(t, source.Close())
@@ -146,7 +146,7 @@ func TestX509SourceX509SVIDPicker(t *testing.T) {
 	})
 
 	// Create the source. It will wait for the initial response.
-	source, err := workloadapi.NewX509Source(ctx, withAddr(api),
+	source, err := workloadapi.NewX509Source(ctx, nil, withAddr(api),
 		workloadapi.WithDefaultX509SVIDPicker(func(svids []*x509svid.SVID) *x509svid.SVID {
 			for _, svid := range svids {
 				if svid.ID == svid2.ID {

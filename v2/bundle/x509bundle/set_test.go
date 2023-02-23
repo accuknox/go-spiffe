@@ -3,8 +3,8 @@ package x509bundle_test
 import (
 	"testing"
 
+	"github.com/accuknox/go-spiffe/v2/bundle/x509bundle"
 	"github.com/stretchr/testify/require"
-	"github.com/vishnusomank/go-spiffe/v2/bundle/x509bundle"
 )
 
 var (

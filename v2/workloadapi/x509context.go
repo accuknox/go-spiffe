@@ -1,8 +1,8 @@
 package workloadapi
 
 import (
-	"github.com/vishnusomank/go-spiffe/v2/bundle/x509bundle"
-	"github.com/vishnusomank/go-spiffe/v2/svid/x509svid"
+	"github.com/accuknox/go-spiffe/v2/bundle/x509bundle"
+	"github.com/accuknox/go-spiffe/v2/svid/x509svid"
 )
 
 // X509Context conveys X.509 materials from the Workload API.

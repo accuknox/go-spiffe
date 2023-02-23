@@ -5,11 +5,11 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/vishnusomank/go-spiffe/v2/bundle/spiffebundle"
-	"github.com/vishnusomank/go-spiffe/v2/federation"
-	"github.com/vishnusomank/go-spiffe/v2/spiffeid"
-	"github.com/vishnusomank/go-spiffe/v2/spiffetls/tlsconfig"
-	"github.com/vishnusomank/go-spiffe/v2/workloadapi"
+	"github.com/accuknox/go-spiffe/v2/bundle/spiffebundle"
+	"github.com/accuknox/go-spiffe/v2/federation"
+	"github.com/accuknox/go-spiffe/v2/spiffeid"
+	"github.com/accuknox/go-spiffe/v2/spiffetls/tlsconfig"
+	"github.com/accuknox/go-spiffe/v2/workloadapi"
 )
 
 func ExampleFetchBundle_webPKI() {
@@ -137,7 +137,7 @@ func ExampleHandler_sPIFFEAuth() {
 	}
 
 	// Create an X.509 source for obtaining the server X509-SVID
-	x509Source, err := workloadapi.NewX509Source(context.TODO())
+	x509Source, err := workloadapi.NewX509Source(context.TODO(), nil)
 	if err != nil {
 		// TODO: handle error
 	}

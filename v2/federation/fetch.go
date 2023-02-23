@@ -6,10 +6,10 @@ import (
 	"crypto/x509"
 	"net/http"
 
-	"github.com/vishnusomank/go-spiffe/v2/bundle/spiffebundle"
-	"github.com/vishnusomank/go-spiffe/v2/bundle/x509bundle"
-	"github.com/vishnusomank/go-spiffe/v2/spiffeid"
-	"github.com/vishnusomank/go-spiffe/v2/spiffetls/tlsconfig"
+	"github.com/accuknox/go-spiffe/v2/bundle/spiffebundle"
+	"github.com/accuknox/go-spiffe/v2/bundle/x509bundle"
+	"github.com/accuknox/go-spiffe/v2/spiffeid"
+	"github.com/accuknox/go-spiffe/v2/spiffetls/tlsconfig"
 	"github.com/zeebo/errs"
 )
 

@@ -7,9 +7,9 @@ import (
 	"io/ioutil"
 	"sync"
 
+	"github.com/accuknox/go-spiffe/v2/internal/jwtutil"
+	"github.com/accuknox/go-spiffe/v2/spiffeid"
 	"github.com/go-jose/go-jose/v3"
-	"github.com/vishnusomank/go-spiffe/v2/internal/jwtutil"
-	"github.com/vishnusomank/go-spiffe/v2/spiffeid"
 	"github.com/zeebo/errs"
 )
 

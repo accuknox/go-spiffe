@@ -4,8 +4,8 @@
 package spiffetls_test
 
 import (
-	"github.com/vishnusomank/go-spiffe/v2/spiffetls"
-	"github.com/vishnusomank/go-spiffe/v2/spiffetls/tlsconfig"
+	"github.com/accuknox/go-spiffe/v2/spiffetls"
+	"github.com/accuknox/go-spiffe/v2/spiffetls/tlsconfig"
 )
 
 func listenAndDialCasesOS() []listenAndDialCase {

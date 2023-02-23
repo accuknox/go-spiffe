@@ -10,13 +10,13 @@ import (
 	"testing"
 	"time"
 
+	"github.com/accuknox/go-spiffe/v2/bundle/jwtbundle"
+	"github.com/accuknox/go-spiffe/v2/spiffeid"
+	"github.com/accuknox/go-spiffe/v2/svid/jwtsvid"
 	"github.com/go-jose/go-jose/v3"
 	"github.com/go-jose/go-jose/v3/cryptosigner"
 	"github.com/go-jose/go-jose/v3/jwt"
 	"github.com/stretchr/testify/require"
-	"github.com/vishnusomank/go-spiffe/v2/bundle/jwtbundle"
-	"github.com/vishnusomank/go-spiffe/v2/spiffeid"
-	"github.com/vishnusomank/go-spiffe/v2/svid/jwtsvid"
 )
 
 const hs256Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG" +

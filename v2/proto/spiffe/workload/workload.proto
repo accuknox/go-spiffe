@@ -154,4 +154,4 @@ message ValidateJWTSVIDResponse {
     google.protobuf.Struct claims = 2;
 }
 
-option go_package = "github.com/vishnusomank/go-spiffe/v2/proto/spiffe/workload;workload";
+option go_package = "github.com/accuknox/go-spiffe/v2/proto/spiffe/workload;workload";

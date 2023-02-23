@@ -6,9 +6,9 @@ import (
 	"net/url"
 	"testing"
 
+	"github.com/accuknox/go-spiffe/v2/spiffeid"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/vishnusomank/go-spiffe/v2/spiffeid"
 )
 
 func TestTrustDomainFromString(t *testing.T) {

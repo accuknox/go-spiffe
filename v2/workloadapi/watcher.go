@@ -4,8 +4,8 @@ import (
 	"context"
 	"sync"
 
-	"github.com/vishnusomank/go-spiffe/v2/bundle/jwtbundle"
-	"github.com/vishnusomank/go-spiffe/v2/svid/jwtsvid"
+	"github.com/accuknox/go-spiffe/v2/bundle/jwtbundle"
+	"github.com/accuknox/go-spiffe/v2/svid/jwtsvid"
 	"github.com/zeebo/errs"
 )
 

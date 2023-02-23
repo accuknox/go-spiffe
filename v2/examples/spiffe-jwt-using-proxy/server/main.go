@@ -9,9 +9,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/vishnusomank/go-spiffe/v2/spiffetls/tlsconfig"
-	"github.com/vishnusomank/go-spiffe/v2/svid/jwtsvid"
-	"github.com/vishnusomank/go-spiffe/v2/workloadapi"
+	"github.com/accuknox/go-spiffe/v2/spiffetls/tlsconfig"
+	"github.com/accuknox/go-spiffe/v2/svid/jwtsvid"
+	"github.com/accuknox/go-spiffe/v2/workloadapi"
 )
 
 const socketPath = "unix:///tmp/agent.sock"
@@ -65,6 +65,7 @@ func run(ctx context.Context) error {
 	// Create an X509Source for the server's TLS configuration.
 	x509Source, err := workloadapi.NewX509Source(
 		ctx,
+		nil,
 		clientOptions,
 	)
 	if err != nil {

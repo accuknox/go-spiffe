@@ -4,9 +4,9 @@ import (
 	"sort"
 	"sync"
 
-	"github.com/vishnusomank/go-spiffe/v2/bundle/jwtbundle"
-	"github.com/vishnusomank/go-spiffe/v2/bundle/x509bundle"
-	"github.com/vishnusomank/go-spiffe/v2/spiffeid"
+	"github.com/accuknox/go-spiffe/v2/bundle/jwtbundle"
+	"github.com/accuknox/go-spiffe/v2/bundle/x509bundle"
+	"github.com/accuknox/go-spiffe/v2/spiffeid"
 )
 
 // Set is a set of bundles, keyed by trust domain.

@@ -14,15 +14,15 @@ import (
 	"testing"
 	"time"
 
+	"github.com/accuknox/go-spiffe/v2/internal/test"
+	"github.com/accuknox/go-spiffe/v2/internal/test/fakeworkloadapi"
+	"github.com/accuknox/go-spiffe/v2/spiffeid"
+	"github.com/accuknox/go-spiffe/v2/spiffetls"
+	"github.com/accuknox/go-spiffe/v2/spiffetls/tlsconfig"
+	"github.com/accuknox/go-spiffe/v2/svid/x509svid"
+	"github.com/accuknox/go-spiffe/v2/workloadapi"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/vishnusomank/go-spiffe/v2/internal/test"
-	"github.com/vishnusomank/go-spiffe/v2/internal/test/fakeworkloadapi"
-	"github.com/vishnusomank/go-spiffe/v2/spiffeid"
-	"github.com/vishnusomank/go-spiffe/v2/spiffetls"
-	"github.com/vishnusomank/go-spiffe/v2/spiffetls/tlsconfig"
-	"github.com/vishnusomank/go-spiffe/v2/svid/x509svid"
-	"github.com/vishnusomank/go-spiffe/v2/workloadapi"
 )
 
 const (
@@ -503,7 +503,7 @@ func setupTestEnv(t *testing.T) (*testEnv, func()) {
 	if testEnv.err != nil {
 		cleanup()
 	}
-	testEnv.wlAPISourceA, testEnv.err = workloadapi.NewX509Source(wlCtx, workloadapi.WithClient(testEnv.wlAPIClientA))
+	testEnv.wlAPISourceA, testEnv.err = workloadapi.NewX509Source(wlCtx, nil, workloadapi.WithClient(testEnv.wlAPIClientA))
 	if testEnv.err != nil {
 		cleanup()
 	}
@@ -514,7 +514,7 @@ func setupTestEnv(t *testing.T) (*testEnv, func()) {
 		cleanup()
 	}
 
-	testEnv.wlAPISourceB, testEnv.err = workloadapi.NewX509Source(wlCtx, workloadapi.WithClient(testEnv.wlAPIClientB))
+	testEnv.wlAPISourceB, testEnv.err = workloadapi.NewX509Source(wlCtx, nil, workloadapi.WithClient(testEnv.wlAPIClientB))
 	if testEnv.err != nil {
 		cleanup()
 	}

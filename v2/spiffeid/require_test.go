@@ -4,8 +4,8 @@ import (
 	"net/url"
 	"testing"
 
+	"github.com/accuknox/go-spiffe/v2/spiffeid"
 	"github.com/stretchr/testify/assert"
-	"github.com/vishnusomank/go-spiffe/v2/spiffeid"
 )
 
 func TestRequireFromPath(t *testing.T) {

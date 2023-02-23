@@ -4,7 +4,7 @@ import (
 	"sort"
 	"sync"
 
-	"github.com/vishnusomank/go-spiffe/v2/spiffeid"
+	"github.com/accuknox/go-spiffe/v2/spiffeid"
 )
 
 // Set is a set of bundles, keyed by trust domain.

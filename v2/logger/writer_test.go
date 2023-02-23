@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"testing"
 
+	"github.com/accuknox/go-spiffe/v2/logger"
 	"github.com/stretchr/testify/require"
-	"github.com/vishnusomank/go-spiffe/v2/logger"
 )
 
 func TestWriter(t *testing.T) {

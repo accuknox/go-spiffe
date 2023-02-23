@@ -3,11 +3,11 @@ package tlsconfig_test
 import (
 	"context"
 
-	"github.com/vishnusomank/go-spiffe/v2/bundle/x509bundle"
-	"github.com/vishnusomank/go-spiffe/v2/spiffeid"
-	"github.com/vishnusomank/go-spiffe/v2/spiffetls/tlsconfig"
-	"github.com/vishnusomank/go-spiffe/v2/svid/x509svid"
-	"github.com/vishnusomank/go-spiffe/v2/workloadapi"
+	"github.com/accuknox/go-spiffe/v2/bundle/x509bundle"
+	"github.com/accuknox/go-spiffe/v2/spiffeid"
+	"github.com/accuknox/go-spiffe/v2/spiffetls/tlsconfig"
+	"github.com/accuknox/go-spiffe/v2/svid/x509svid"
+	"github.com/accuknox/go-spiffe/v2/workloadapi"
 )
 
 func ExampleMTLSServerConfig_fileSource() {
@@ -37,7 +37,7 @@ func ExampleMTLSServerConfig_workloadAPISource() {
 		// TODO: error handling
 	}
 
-	source, err := workloadapi.NewX509Source(context.Background())
+	source, err := workloadapi.NewX509Source(context.Background(), nil)
 	if err != nil {
 		// TODO: handle error
 	}

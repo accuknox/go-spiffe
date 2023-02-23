@@ -5,11 +5,11 @@ import (
 	"testing"
 	"time"
 
+	"github.com/accuknox/go-spiffe/v2/bundle/spiffebundle"
+	"github.com/accuknox/go-spiffe/v2/federation"
+	"github.com/accuknox/go-spiffe/v2/internal/test"
+	"github.com/accuknox/go-spiffe/v2/internal/test/fakebundleendpoint"
 	"github.com/stretchr/testify/assert"
-	"github.com/vishnusomank/go-spiffe/v2/bundle/spiffebundle"
-	"github.com/vishnusomank/go-spiffe/v2/federation"
-	"github.com/vishnusomank/go-spiffe/v2/internal/test"
-	"github.com/vishnusomank/go-spiffe/v2/internal/test/fakebundleendpoint"
 )
 
 func TestWatchBundle_OnUpdate(t *testing.T) {

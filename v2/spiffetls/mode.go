@@ -4,10 +4,10 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 
-	"github.com/vishnusomank/go-spiffe/v2/bundle/x509bundle"
-	"github.com/vishnusomank/go-spiffe/v2/spiffetls/tlsconfig"
-	"github.com/vishnusomank/go-spiffe/v2/svid/x509svid"
-	"github.com/vishnusomank/go-spiffe/v2/workloadapi"
+	"github.com/accuknox/go-spiffe/v2/bundle/x509bundle"
+	"github.com/accuknox/go-spiffe/v2/spiffetls/tlsconfig"
+	"github.com/accuknox/go-spiffe/v2/svid/x509svid"
+	"github.com/accuknox/go-spiffe/v2/workloadapi"
 )
 
 type clientMode int

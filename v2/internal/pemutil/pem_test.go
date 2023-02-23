@@ -6,8 +6,8 @@ import (
 	"encoding/pem"
 	"testing"
 
+	"github.com/accuknox/go-spiffe/v2/internal/pemutil"
 	"github.com/stretchr/testify/require"
-	"github.com/vishnusomank/go-spiffe/v2/internal/pemutil"
 )
 
 var (

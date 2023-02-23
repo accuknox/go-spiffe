@@ -9,9 +9,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/vishnusomank/go-spiffe/v2/spiffetls/tlsconfig"
-	"github.com/vishnusomank/go-spiffe/v2/svid/jwtsvid"
-	"github.com/vishnusomank/go-spiffe/v2/workloadapi"
+	"github.com/accuknox/go-spiffe/v2/spiffetls/tlsconfig"
+	"github.com/accuknox/go-spiffe/v2/svid/jwtsvid"
+	"github.com/accuknox/go-spiffe/v2/workloadapi"
 )
 
 const socketPath = "unix:///tmp/agent.sock"
@@ -76,7 +76,7 @@ func run(ctx context.Context) error {
 	clientOptions := workloadapi.WithClientOptions(workloadapi.WithAddr(socketPath))
 
 	// Create a X509Source using previously create workloadapi client
-	x509Source, err := workloadapi.NewX509Source(ctx, clientOptions)
+	x509Source, err := workloadapi.NewX509Source(ctx, nil, clientOptions)
 	if err != nil {
 		return fmt.Errorf("unable to create X509Source: %w", err)
 	}
