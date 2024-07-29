@@ -10,7 +10,7 @@ import (
 	"github.com/accuknox/go-spiffe/v2/bundle/jwtbundle"
 	"github.com/accuknox/go-spiffe/v2/bundle/x509bundle"
 	"github.com/accuknox/go-spiffe/v2/logger"
-	"github.com/accuknox/go-spiffe/v2/proto/spiffe/workload"
+	workload "github.com/accuknox/go-spiffe/v2/proto/spiffe/workload"
 	"github.com/accuknox/go-spiffe/v2/spiffeid"
 	"github.com/accuknox/go-spiffe/v2/svid/jwtsvid"
 	"github.com/accuknox/go-spiffe/v2/svid/x509svid"
