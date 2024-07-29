@@ -351,5 +351,5 @@ var _SpiffeWorkloadAPI_serviceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 	},
-	Metadata: "workload.proto",
+	Metadata: "workload_custom.proto",
 }

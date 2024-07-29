@@ -75,7 +75,7 @@ golangci_lint_dir = $(build_dir)/golangci_lint/$(golangci_lint_version)
 golangci_lint_bin = $(golangci_lint_dir)/golangci-lint
 
 apiprotos := \
-	v2/proto/spiffe/workload/workload.proto \
+	v2/proto/spiffe/workload_custom/workload_custom.proto \
 
 #############################################################################
 # Toolchain

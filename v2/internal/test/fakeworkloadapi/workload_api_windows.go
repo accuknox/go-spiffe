@@ -12,7 +12,7 @@ import (
 	"time"
 
 	"github.com/Microsoft/go-winio"
-	"github.com/accuknox/go-spiffe/v2/proto/spiffe/workload"
+	workload "github.com/accuknox/go-spiffe/v2/proto/spiffe/workload_custom"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc"
 )

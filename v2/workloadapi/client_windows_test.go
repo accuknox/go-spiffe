@@ -19,7 +19,7 @@ func TestWithNamedPipeName(t *testing.T) {
 	defer wl.Stop()
 
 	pipeName := strings.TrimPrefix(wl.Addr(), "npipe:")
-	c, err := New(context.Background(), WithNamedPipeName(pipeName))
+	c, err := New(context.Background(), nil, WithNamedPipeName(pipeName))
 	require.NoError(t, err)
 	defer c.Close()
 	require.Equal(t, pipeName, c.config.namedPipeName)
@@ -29,7 +29,7 @@ func TestWithNamedPipeName(t *testing.T) {
 		SVIDs:  makeX509SVIDs(ca, fooID, barID),
 	}
 	wl.SetX509SVIDResponse(resp)
-	svid, err := c.FetchX509SVID(context.Background())
+	svid, err := c.FetchX509SVID(context.Background(), nil)
 	require.NoError(t, err)
 	assertX509SVID(t, svid, fooID, resp.SVIDs[0].Certificates)
 }
@@ -38,12 +38,12 @@ func TestWithNamedPipeNameError(t *testing.T) {
 	wl := fakeworkloadapi.NewWithNamedPipeListener(t)
 	defer wl.Stop()
 
-	c, err := New(context.Background(), WithNamedPipeName("ohno"))
+	c, err := New(context.Background(), nil, WithNamedPipeName("ohno"))
 	require.NoError(t, err)
 	defer c.Close()
 
 	wl.SetX509SVIDResponse(&fakeworkloadapi.X509SVIDResponse{})
-	_, err = c.FetchX509SVID(context.Background())
+	_, err = c.FetchX509SVID(context.Background(), nil)
 	require.Error(t, err)
 	require.Contains(t, err.Error(), `ohno: The system cannot find the file specified`)
 }
