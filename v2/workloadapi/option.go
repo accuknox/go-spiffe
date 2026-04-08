@@ -11,6 +11,13 @@ type ClientOption interface {
 	configureClient(*clientConfig)
 }
 
+// WithSaPath provides a path to a service account file.
+func WithSaPath(path string) ClientOption {
+	return clientOption(func(c *clientConfig) {
+		c.saPath = path
+	})
+}
+
 // WithAddr provides an address for the Workload API. The value of the
 // SPIFFE_ENDPOINT_SOCKET environment variable will be used if the option
 // is unused.
@@ -85,6 +92,7 @@ type clientConfig struct {
 	namedPipeName string
 	dialOptions   []grpc.DialOption
 	log           logger.Logger
+	saPath        string
 }
 
 type clientOption func(*clientConfig)
