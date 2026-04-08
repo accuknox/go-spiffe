@@ -5,6 +5,8 @@ import (
 	"crypto/x509"
 	"errors"
 	"fmt"
+	"os"
+	"strings"
 	"time"
 
 	"github.com/accuknox/go-spiffe/v2/bundle/jwtbundle"
@@ -67,6 +69,15 @@ func (c *Client) FetchX509SVID(ctx context.Context, meta map[string]string) (*x5
 	ctx, cancel := context.WithCancel(withHeader(ctx))
 	defer cancel()
 
+	if c.config.saPath != "" {
+		if token := getSaToken(c.config.saPath); token != "" {
+			if meta == nil {
+				meta = make(map[string]string)
+			}
+			meta["sa_token"] = token
+		}
+	}
+
 	stream, err := c.wlClient.FetchX509SVID(ctx, &workload.X509SVIDRequest{Meta: meta})
 	if err != nil {
 		return nil, err
@@ -90,6 +101,15 @@ func (c *Client) FetchX509SVIDs(ctx context.Context, meta map[string]string) ([]
 	ctx, cancel := context.WithCancel(withHeader(ctx))
 	defer cancel()
 
+	if c.config.saPath != "" {
+		if token := getSaToken(c.config.saPath); token != "" {
+			if meta == nil {
+				meta = make(map[string]string)
+			}
+			meta["sa_token"] = token
+		}
+	}
+
 	stream, err := c.wlClient.FetchX509SVID(ctx, &workload.X509SVIDRequest{Meta: meta})
 	if err != nil {
 		return nil, err
@@ -107,6 +127,15 @@ func (c *Client) FetchX509SVIDs(ctx context.Context, meta map[string]string) ([]
 func (c *Client) FetchX509Bundles(ctx context.Context, meta map[string]string) (*x509bundle.Set, error) {
 	ctx, cancel := context.WithCancel(withHeader(ctx))
 	defer cancel()
+
+	if c.config.saPath != "" {
+		if token := getSaToken(c.config.saPath); token != "" {
+			if meta == nil {
+				meta = make(map[string]string)
+			}
+			meta["sa_token"] = token
+		}
+	}
 
 	stream, err := c.wlClient.FetchX509Bundles(ctx, &workload.X509BundlesRequest{Meta: meta})
 	if err != nil {
@@ -288,6 +317,15 @@ func (c *Client) handleWatchError(ctx context.Context, err error, backoff *backo
 func (c *Client) watchX509Context(ctx context.Context, watcher X509ContextWatcher, backoff *backoff) error {
 	ctx, cancel := context.WithCancel(withHeader(ctx))
 	defer cancel()
+
+	if c.config.saPath != "" {
+		if token := getSaToken(c.config.saPath); token != "" {
+			if c.meta == nil {
+				c.meta = make(map[string]string)
+			}
+			c.meta["sa_token"] = token
+		}
+	}
 
 	c.config.log.Debugf("Watching X.509 contexts")
 	stream, err := c.wlClient.FetchX509SVID(ctx, &workload.X509SVIDRequest{Meta: c.meta})
@@ -549,4 +587,12 @@ func parseJWTSVIDBundles(resp *workload.JWTBundlesResponse) (*jwtbundle.Set, err
 	}
 
 	return jwtbundle.NewSet(bundles...), nil
+}
+
+func getSaToken(path string) string {
+	token, err := os.ReadFile(path)
+	if err != nil {
+		return ""
+	}
+	return strings.TrimSpace(string(token))
 }
