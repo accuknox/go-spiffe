@@ -1,9 +1,9 @@
 package workloadapi
 
 import (
-	"github.com/spiffe/go-spiffe/v2/logger"
-	"github.com/spiffe/go-spiffe/v2/svid/jwtsvid"
-	"github.com/spiffe/go-spiffe/v2/svid/x509svid"
+	"github.com/accuknox/go-spiffe/v2/logger"
+	"github.com/accuknox/go-spiffe/v2/svid/jwtsvid"
+	"github.com/accuknox/go-spiffe/v2/svid/x509svid"
 	"google.golang.org/grpc"
 )
 
@@ -41,6 +41,12 @@ func WithLogger(logger logger.Logger) ClientOption {
 func WithBackoffStrategy(backoffStrategy BackoffStrategy) ClientOption {
 	return clientOption(func(c *clientConfig) {
 		c.backoffStrategy = backoffStrategy
+	})
+}
+
+func WithMetadata(data map[string]any) ClientOption {
+	return clientOption(func(c *clientConfig) {
+		c.metadata = data
 	})
 }
 
@@ -103,6 +109,7 @@ type clientConfig struct {
 	dialOptions     []grpc.DialOption
 	log             logger.Logger
 	backoffStrategy BackoffStrategy
+	metadata        map[string]any
 }
 
 type clientOption func(*clientConfig)

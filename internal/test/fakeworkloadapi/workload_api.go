@@ -9,13 +9,13 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/spiffe/go-spiffe/v2/bundle/jwtbundle"
-	"github.com/spiffe/go-spiffe/v2/bundle/x509bundle"
-	"github.com/spiffe/go-spiffe/v2/internal/pemutil"
-	"github.com/spiffe/go-spiffe/v2/internal/x509util"
-	"github.com/spiffe/go-spiffe/v2/proto/spiffe/workload"
-	"github.com/spiffe/go-spiffe/v2/svid/jwtsvid"
-	"github.com/spiffe/go-spiffe/v2/svid/x509svid"
+	"github.com/accuknox/go-spiffe/v2/bundle/jwtbundle"
+	"github.com/accuknox/go-spiffe/v2/bundle/x509bundle"
+	"github.com/accuknox/go-spiffe/v2/internal/pemutil"
+	"github.com/accuknox/go-spiffe/v2/internal/x509util"
+	"github.com/accuknox/go-spiffe/v2/proto/spiffe/workload"
+	"github.com/accuknox/go-spiffe/v2/svid/jwtsvid"
+	"github.com/accuknox/go-spiffe/v2/svid/x509svid"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc"
@@ -393,7 +393,7 @@ func checkMetadata(ctx context.Context, key, value string) error {
 	return nil
 }
 
-func structFromValues(values map[string]interface{}) (*structpb.Struct, error) {
+func structFromValues(values map[string]any) (*structpb.Struct, error) {
 	valuesJSON, err := json.Marshal(values)
 	if err != nil {
 		return nil, err

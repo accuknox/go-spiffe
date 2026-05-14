@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/spiffe/go-spiffe/v2/bundle/x509bundle"
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
-	"github.com/spiffe/go-spiffe/v2/svid/x509svid"
+	"github.com/accuknox/go-spiffe/v2/bundle/x509bundle"
+	"github.com/accuknox/go-spiffe/v2/spiffeid"
+	"github.com/accuknox/go-spiffe/v2/svid/x509svid"
 )
 
 // X509Source is a source of X509-SVIDs and X.509 bundles maintained via the

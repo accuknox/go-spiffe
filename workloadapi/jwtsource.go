@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/spiffe/go-spiffe/v2/bundle/jwtbundle"
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
-	"github.com/spiffe/go-spiffe/v2/svid/jwtsvid"
+	"github.com/accuknox/go-spiffe/v2/bundle/jwtbundle"
+	"github.com/accuknox/go-spiffe/v2/spiffeid"
+	"github.com/accuknox/go-spiffe/v2/svid/jwtsvid"
 )
 
 // JWTSource is a source of JWT-SVID and JWT bundles maintained via the

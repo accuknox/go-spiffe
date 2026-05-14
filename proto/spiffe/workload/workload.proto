@@ -39,8 +39,11 @@ service SpiffeWorkloadAPI {
 }
 
 // The X509SVIDRequest message conveys parameters for requesting an X.509-SVID.
-// There are currently no request parameters.
-message X509SVIDRequest {  }
+// We can pass any to the server to specify which SPIFFE IDs to
+// request.
+message X509SVIDRequest { 
+    google.protobuf.Struct metadata = 1;
+}
 
 // The X509SVIDResponse message carries X.509-SVIDs and related information,
 // including a set of global CRLs and a list of bundles the workload may use
@@ -83,8 +86,10 @@ message X509SVID {
 }
 
 // The X509BundlesRequest message conveys parameters for requesting X.509
-// bundles. There are currently no such parameters.
+// bundles. We can pass any to the server to specify which SPIFFE IDs to
+// request.
 message X509BundlesRequest {
+    google.protobuf.Struct metadata = 1;
 }
 
 // The X509BundlesResponse message carries a set of global CRLs and a map of
@@ -163,4 +168,4 @@ message ValidateJWTSVIDResponse {
     google.protobuf.Struct claims = 2;
 }
 
-option go_package = "github.com/spiffe/go-spiffe/v2/proto/spiffe/workload;workload";
+option go_package = "github.com/accuknox/go-spiffe/v2/proto/spiffe/workload;workload";

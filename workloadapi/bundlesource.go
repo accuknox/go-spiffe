@@ -8,10 +8,10 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/spiffe/go-spiffe/v2/bundle/jwtbundle"
-	"github.com/spiffe/go-spiffe/v2/bundle/spiffebundle"
-	"github.com/spiffe/go-spiffe/v2/bundle/x509bundle"
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
+	"github.com/accuknox/go-spiffe/v2/bundle/jwtbundle"
+	"github.com/accuknox/go-spiffe/v2/bundle/spiffebundle"
+	"github.com/accuknox/go-spiffe/v2/bundle/x509bundle"
+	"github.com/accuknox/go-spiffe/v2/spiffeid"
 )
 
 // BundleSource is a source of SPIFFE bundles maintained via the Workload API.

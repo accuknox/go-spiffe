@@ -9,10 +9,10 @@ import (
 	"os"
 	"time"
 
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
-	"github.com/spiffe/go-spiffe/v2/spiffetls/tlsconfig"
-	"github.com/spiffe/go-spiffe/v2/svid/jwtsvid"
-	"github.com/spiffe/go-spiffe/v2/workloadapi"
+	"github.com/accuknox/go-spiffe/v2/spiffeid"
+	"github.com/accuknox/go-spiffe/v2/spiffetls/tlsconfig"
+	"github.com/accuknox/go-spiffe/v2/svid/jwtsvid"
+	"github.com/accuknox/go-spiffe/v2/workloadapi"
 )
 
 const (
@@ -43,7 +43,7 @@ func run(ctx context.Context) error {
 	serverID := spiffeid.RequireFromString("spiffe://example.org/server")
 
 	// By default, this example uses the server's SPIFFE ID as the audience.
-	// It doesn't have to be a SPIFFE ID as long as it follows the JWT-SVID guidelines (https://github.com/spiffe/spiffe/blob/main/standards/JWT-SVID.md#32-audience)
+	// It doesn't have to be a SPIFFE ID as long as it follows the JWT-SVID guidelines (https://github.com/accuknox/spiffe/blob/main/standards/JWT-SVID.md#32-audience)
 	audience := serverID.String()
 	args := os.Args
 	if len(args) >= 2 {

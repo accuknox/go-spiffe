@@ -10,10 +10,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/spiffe/go-spiffe/v2/bundle/spiffebundle"
-	"github.com/spiffe/go-spiffe/v2/federation"
-	"github.com/spiffe/go-spiffe/v2/logger"
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
+	"github.com/accuknox/go-spiffe/v2/bundle/spiffebundle"
+	"github.com/accuknox/go-spiffe/v2/federation"
+	"github.com/accuknox/go-spiffe/v2/logger"
+	"github.com/accuknox/go-spiffe/v2/spiffeid"
 	"github.com/stretchr/testify/require"
 )
 

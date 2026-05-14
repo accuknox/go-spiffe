@@ -5,10 +5,10 @@ import (
 	"os"
 	"testing"
 
-	"github.com/spiffe/go-spiffe/v2/bundle/jwtbundle"
-	"github.com/spiffe/go-spiffe/v2/internal/test"
-	"github.com/spiffe/go-spiffe/v2/internal/test/errstrings"
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
+	"github.com/accuknox/go-spiffe/v2/bundle/jwtbundle"
+	"github.com/accuknox/go-spiffe/v2/internal/test"
+	"github.com/accuknox/go-spiffe/v2/internal/test/errstrings"
+	"github.com/accuknox/go-spiffe/v2/spiffeid"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

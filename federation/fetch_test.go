@@ -5,10 +5,10 @@ import (
 	"net"
 	"testing"
 
-	"github.com/spiffe/go-spiffe/v2/federation"
-	"github.com/spiffe/go-spiffe/v2/internal/test"
-	"github.com/spiffe/go-spiffe/v2/internal/test/fakebundleendpoint"
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
+	"github.com/accuknox/go-spiffe/v2/federation"
+	"github.com/accuknox/go-spiffe/v2/internal/test"
+	"github.com/accuknox/go-spiffe/v2/internal/test/fakebundleendpoint"
+	"github.com/accuknox/go-spiffe/v2/spiffeid"
 	"github.com/stretchr/testify/assert"
 )
 

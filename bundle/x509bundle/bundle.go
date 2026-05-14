@@ -7,9 +7,9 @@ import (
 	"os"
 	"sync"
 
-	"github.com/spiffe/go-spiffe/v2/internal/pemutil"
-	"github.com/spiffe/go-spiffe/v2/internal/x509util"
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
+	"github.com/accuknox/go-spiffe/v2/internal/pemutil"
+	"github.com/accuknox/go-spiffe/v2/internal/x509util"
+	"github.com/accuknox/go-spiffe/v2/spiffeid"
 )
 
 // Bundle is a collection of trusted X.509 authorities for a trust domain.

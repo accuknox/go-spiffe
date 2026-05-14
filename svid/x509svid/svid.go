@@ -11,9 +11,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/spiffe/go-spiffe/v2/internal/pemutil"
-	"github.com/spiffe/go-spiffe/v2/internal/x509util"
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
+	"github.com/accuknox/go-spiffe/v2/internal/pemutil"
+	"github.com/accuknox/go-spiffe/v2/internal/x509util"
+	"github.com/accuknox/go-spiffe/v2/spiffeid"
 )
 
 // SVID represents a SPIFFE X509-SVID.

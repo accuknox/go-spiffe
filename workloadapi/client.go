@@ -4,21 +4,30 @@ import (
 	"context"
 	"crypto/x509"
 	"errors"
+	"fmt"
+	"os"
+	"strings"
 	"time"
 
-	"github.com/spiffe/go-spiffe/v2/bundle/jwtbundle"
-	"github.com/spiffe/go-spiffe/v2/bundle/x509bundle"
-	"github.com/spiffe/go-spiffe/v2/logger"
-	"github.com/spiffe/go-spiffe/v2/proto/spiffe/workload"
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
-	"github.com/spiffe/go-spiffe/v2/svid/jwtsvid"
-	"github.com/spiffe/go-spiffe/v2/svid/x509svid"
+	"github.com/accuknox/go-spiffe/v2/bundle/jwtbundle"
+	"github.com/accuknox/go-spiffe/v2/bundle/x509bundle"
+	"github.com/accuknox/go-spiffe/v2/logger"
+	"github.com/accuknox/go-spiffe/v2/proto/spiffe/workload"
+	"github.com/accuknox/go-spiffe/v2/spiffeid"
+	"github.com/accuknox/go-spiffe/v2/svid/jwtsvid"
+	"github.com/accuknox/go-spiffe/v2/svid/x509svid"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
+	"google.golang.org/protobuf/types/known/structpb"
+)
+
+const (
+	sa_token_key = "sa_token"
+	sa_path_key  = "sa_path"
 )
 
 // Client is a Workload API client.
@@ -63,7 +72,14 @@ func (c *Client) FetchX509SVID(ctx context.Context) (*x509svid.SVID, error) {
 	ctx, cancel := context.WithCancel(withHeader(ctx))
 	defer cancel()
 
-	stream, err := c.wlClient.FetchX509SVID(ctx, &workload.X509SVIDRequest{})
+	metadata, err := c.updateMetadata()
+	if err != nil {
+		return nil, err
+	}
+
+	stream, err := c.wlClient.FetchX509SVID(ctx, &workload.X509SVIDRequest{
+		Metadata: metadata,
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +102,14 @@ func (c *Client) FetchX509SVIDs(ctx context.Context) ([]*x509svid.SVID, error) {
 	ctx, cancel := context.WithCancel(withHeader(ctx))
 	defer cancel()
 
-	stream, err := c.wlClient.FetchX509SVID(ctx, &workload.X509SVIDRequest{})
+	metadata, err := c.updateMetadata()
+	if err != nil {
+		return nil, err
+	}
+
+	stream, err := c.wlClient.FetchX509SVID(ctx, &workload.X509SVIDRequest{
+		Metadata: metadata,
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -104,7 +127,14 @@ func (c *Client) FetchX509Bundles(ctx context.Context) (*x509bundle.Set, error) 
 	ctx, cancel := context.WithCancel(withHeader(ctx))
 	defer cancel()
 
-	stream, err := c.wlClient.FetchX509Bundles(ctx, &workload.X509BundlesRequest{})
+	metadata, err := c.updateMetadata()
+	if err != nil {
+		return nil, err
+	}
+
+	stream, err := c.wlClient.FetchX509Bundles(ctx, &workload.X509BundlesRequest{
+		Metadata: metadata,
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -136,7 +166,14 @@ func (c *Client) FetchX509Context(ctx context.Context) (*X509Context, error) {
 	ctx, cancel := context.WithCancel(withHeader(ctx))
 	defer cancel()
 
-	stream, err := c.wlClient.FetchX509SVID(ctx, &workload.X509SVIDRequest{})
+	metadata, err := c.updateMetadata()
+	if err != nil {
+		return nil, err
+	}
+
+	stream, err := c.wlClient.FetchX509SVID(ctx, &workload.X509SVIDRequest{
+		Metadata: metadata,
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -285,8 +322,15 @@ func (c *Client) watchX509Context(ctx context.Context, watcher X509ContextWatche
 	ctx, cancel := context.WithCancel(withHeader(ctx))
 	defer cancel()
 
+	metadata, err := c.updateMetadata()
+	if err != nil {
+		return err
+	}
+
 	c.config.log.Debugf("Watching X.509 contexts")
-	stream, err := c.wlClient.FetchX509SVID(ctx, &workload.X509SVIDRequest{})
+	stream, err := c.wlClient.FetchX509SVID(ctx, &workload.X509SVIDRequest{
+		Metadata: metadata,
+	})
 	if err != nil {
 		return err
 	}
@@ -339,8 +383,15 @@ func (c *Client) watchX509Bundles(ctx context.Context, watcher X509BundleWatcher
 	ctx, cancel := context.WithCancel(withHeader(ctx))
 	defer cancel()
 
+	metadata, err := c.updateMetadata()
+	if err != nil {
+		return err
+	}
+
 	c.config.log.Debugf("Watching X.509 bundles")
-	stream, err := c.wlClient.FetchX509Bundles(ctx, &workload.X509BundlesRequest{})
+	stream, err := c.wlClient.FetchX509Bundles(ctx, &workload.X509BundlesRequest{
+		Metadata: metadata,
+	})
 	if err != nil {
 		return err
 	}
@@ -562,4 +613,28 @@ func parseJWTSVIDBundles(resp *workload.JWTBundlesResponse) (*jwtbundle.Set, err
 	}
 
 	return jwtbundle.NewSet(bundles...), nil
+}
+
+func fetchServiceAccountToken(path string) (string, error) {
+	token, err := os.ReadFile(path)
+	if err != nil {
+		return "", fmt.Errorf("failed to get service account token from path %s: %v", path, err)
+	}
+
+	return strings.TrimSpace(string(token)), nil
+}
+
+func (c *Client) updateMetadata() (*structpb.Struct, error) {
+	if len(c.config.metadata) <= 0 {
+		c.config.metadata = make(map[string]any)
+	}
+
+	if path, ok := c.config.metadata[sa_path_key].(string); ok {
+		if token, err := fetchServiceAccountToken(path); err == nil {
+			c.config.metadata[sa_token_key] = token
+		}
+	}
+
+	return structpb.NewStruct(c.config.metadata)
+
 }

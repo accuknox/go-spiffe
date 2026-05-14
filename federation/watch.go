@@ -5,8 +5,8 @@ import (
 	"errors"
 	"time"
 
-	"github.com/spiffe/go-spiffe/v2/bundle/spiffebundle"
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
+	"github.com/accuknox/go-spiffe/v2/bundle/spiffebundle"
+	"github.com/accuknox/go-spiffe/v2/spiffeid"
 )
 
 // BundleWatcher is used by WatchBundle to provide the caller with bundle updates and

@@ -5,8 +5,8 @@ import (
 	"errors"
 	"sync"
 
-	"github.com/spiffe/go-spiffe/v2/bundle/jwtbundle"
-	"github.com/spiffe/go-spiffe/v2/svid/jwtsvid"
+	"github.com/accuknox/go-spiffe/v2/bundle/jwtbundle"
+	"github.com/accuknox/go-spiffe/v2/svid/jwtsvid"
 )
 
 type sourceClient interface {

@@ -13,16 +13,16 @@ import (
 	"testing"
 	"time"
 
+	"github.com/accuknox/go-spiffe/v2/bundle/jwtbundle"
+	"github.com/accuknox/go-spiffe/v2/bundle/spiffebundle"
+	"github.com/accuknox/go-spiffe/v2/bundle/x509bundle"
+	"github.com/accuknox/go-spiffe/v2/internal/x509util"
+	"github.com/accuknox/go-spiffe/v2/spiffeid"
+	"github.com/accuknox/go-spiffe/v2/svid/jwtsvid"
+	"github.com/accuknox/go-spiffe/v2/svid/x509svid"
 	"github.com/go-jose/go-jose/v4"
 	"github.com/go-jose/go-jose/v4/cryptosigner"
 	"github.com/go-jose/go-jose/v4/jwt"
-	"github.com/spiffe/go-spiffe/v2/bundle/jwtbundle"
-	"github.com/spiffe/go-spiffe/v2/bundle/spiffebundle"
-	"github.com/spiffe/go-spiffe/v2/bundle/x509bundle"
-	"github.com/spiffe/go-spiffe/v2/internal/x509util"
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
-	"github.com/spiffe/go-spiffe/v2/svid/jwtsvid"
-	"github.com/spiffe/go-spiffe/v2/svid/x509svid"
 	"github.com/stretchr/testify/require"
 )
 

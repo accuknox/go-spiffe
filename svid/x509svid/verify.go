@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/spiffe/go-spiffe/v2/bundle/x509bundle"
-	"github.com/spiffe/go-spiffe/v2/internal/x509util"
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
+	"github.com/accuknox/go-spiffe/v2/bundle/x509bundle"
+	"github.com/accuknox/go-spiffe/v2/internal/x509util"
+	"github.com/accuknox/go-spiffe/v2/spiffeid"
 )
 
 // VerifyOption is an option used when verifying X509-SVIDs.

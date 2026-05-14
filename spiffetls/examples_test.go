@@ -4,9 +4,9 @@ import (
 	"context"
 	"crypto/tls"
 
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
-	"github.com/spiffe/go-spiffe/v2/spiffetls"
-	"github.com/spiffe/go-spiffe/v2/spiffetls/tlsconfig"
+	"github.com/accuknox/go-spiffe/v2/spiffeid"
+	"github.com/accuknox/go-spiffe/v2/spiffetls"
+	"github.com/accuknox/go-spiffe/v2/spiffetls/tlsconfig"
 )
 
 func ExampleListen_mTLS() {

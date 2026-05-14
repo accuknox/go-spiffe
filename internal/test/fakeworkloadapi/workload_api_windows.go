@@ -13,7 +13,7 @@ import (
 	"testing"
 
 	"github.com/Microsoft/go-winio"
-	"github.com/spiffe/go-spiffe/v2/proto/spiffe/workload"
+	"github.com/accuknox/go-spiffe/v2/proto/spiffe/workload"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc"
 )

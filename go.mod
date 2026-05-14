@@ -1,4 +1,4 @@
-module github.com/spiffe/go-spiffe/v2
+module github.com/accuknox/go-spiffe/v2
 
 go 1.24.0
 

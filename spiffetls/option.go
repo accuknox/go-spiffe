@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net"
 
-	"github.com/spiffe/go-spiffe/v2/spiffetls/tlsconfig"
+	"github.com/accuknox/go-spiffe/v2/spiffetls/tlsconfig"
 )
 
 // DialOption is an option for dialing. Option's are also DialOption's.

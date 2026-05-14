@@ -9,9 +9,9 @@ import (
 	"os"
 	"sync"
 
+	"github.com/accuknox/go-spiffe/v2/internal/jwtutil"
+	"github.com/accuknox/go-spiffe/v2/spiffeid"
 	"github.com/go-jose/go-jose/v4"
-	"github.com/spiffe/go-spiffe/v2/internal/jwtutil"
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
 )
 
 // Bundle is a collection of trusted JWT authorities for a trust domain.

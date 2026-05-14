@@ -5,11 +5,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/spiffe/go-spiffe/v2/internal/test"
-	"github.com/spiffe/go-spiffe/v2/internal/test/fakeworkloadapi"
-	"github.com/spiffe/go-spiffe/v2/spiffeid"
-	"github.com/spiffe/go-spiffe/v2/svid/jwtsvid"
-	"github.com/spiffe/go-spiffe/v2/workloadapi"
+	"github.com/accuknox/go-spiffe/v2/internal/test"
+	"github.com/accuknox/go-spiffe/v2/internal/test/fakeworkloadapi"
+	"github.com/accuknox/go-spiffe/v2/spiffeid"
+	"github.com/accuknox/go-spiffe/v2/svid/jwtsvid"
+	"github.com/accuknox/go-spiffe/v2/workloadapi"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

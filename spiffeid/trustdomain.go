@@ -14,7 +14,7 @@ type TrustDomain struct {
 // TrustDomainFromString returns a new TrustDomain from a string. The string
 // can either be a trust domain name (e.g. example.org), or a valid SPIFFE ID
 // URI (e.g. spiffe://example.org), otherwise an error is returned.
-// See https://github.com/spiffe/spiffe/blob/main/standards/SPIFFE-ID.md#21-trust-domain.
+// See https://github.com/accuknox/spiffe/blob/main/standards/SPIFFE-ID.md#21-trust-domain.
 func TrustDomainFromString(idOrName string) (TrustDomain, error) {
 	switch {
 	case idOrName == "":

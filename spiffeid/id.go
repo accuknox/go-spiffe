@@ -15,7 +15,7 @@ const (
 // FromPath returns a new SPIFFE ID in the given trust domain and with the
 // given path. The supplied path must be a valid absolute path according to the
 // SPIFFE specification.
-// See https://github.com/spiffe/spiffe/blob/main/standards/SPIFFE-ID.md#22-path
+// See https://github.com/accuknox/spiffe/blob/main/standards/SPIFFE-ID.md#22-path
 func FromPath(td TrustDomain, path string) (ID, error) {
 	if err := ValidatePath(path); err != nil {
 		return ID{}, err
@@ -26,7 +26,7 @@ func FromPath(td TrustDomain, path string) (ID, error) {
 // FromPathf returns a new SPIFFE ID from the formatted path in the given trust
 // domain. The formatted path must be a valid absolute path according to the
 // SPIFFE specification.
-// See https://github.com/spiffe/spiffe/blob/main/standards/SPIFFE-ID.md#22-path
+// See https://github.com/accuknox/spiffe/blob/main/standards/SPIFFE-ID.md#22-path
 func FromPathf(td TrustDomain, format string, args ...interface{}) (ID, error) {
 	path, err := FormatPath(format, args...)
 	if err != nil {
@@ -38,7 +38,7 @@ func FromPathf(td TrustDomain, format string, args ...interface{}) (ID, error) {
 // FromSegments returns a new SPIFFE ID in the given trust domain with joined
 // path segments. The path segments must be valid according to the SPIFFE
 // specification and must not contain path separators.
-// See https://github.com/spiffe/spiffe/blob/main/standards/SPIFFE-ID.md#22-path
+// See https://github.com/accuknox/spiffe/blob/main/standards/SPIFFE-ID.md#22-path
 func FromSegments(td TrustDomain, segments ...string) (ID, error) {
 	path, err := JoinPathSegments(segments...)
 	if err != nil {
@@ -145,7 +145,7 @@ func (id ID) IsZero() bool {
 // AppendPath returns an ID with the appended path. It will fail if called on a
 // zero value. The path to append must be a valid absolute path according to
 // the SPIFFE specification.
-// See https://github.com/spiffe/spiffe/blob/main/standards/SPIFFE-ID.md#22-path
+// See https://github.com/accuknox/spiffe/blob/main/standards/SPIFFE-ID.md#22-path
 func (id ID) AppendPath(path string) (ID, error) {
 	if id.IsZero() {
 		return ID{}, errors.New("cannot append path on a zero ID value")
@@ -160,7 +160,7 @@ func (id ID) AppendPath(path string) (ID, error) {
 // AppendPathf returns an ID with the appended formatted path. It will fail if
 // called on a zero value. The formatted path must be a valid absolute path
 // according to the SPIFFE specification.
-// See https://github.com/spiffe/spiffe/blob/main/standards/SPIFFE-ID.md#22-path
+// See https://github.com/accuknox/spiffe/blob/main/standards/SPIFFE-ID.md#22-path
 func (id ID) AppendPathf(format string, args ...interface{}) (ID, error) {
 	if id.IsZero() {
 		return ID{}, errors.New("cannot append path on a zero ID value")
@@ -176,7 +176,7 @@ func (id ID) AppendPathf(format string, args ...interface{}) (ID, error) {
 // AppendSegments returns an ID with the appended joined path segments.  It
 // will fail if called on a zero value. The path segments must be valid
 // according to the SPIFFE specification and must not contain path separators.
-// See https://github.com/spiffe/spiffe/blob/main/standards/SPIFFE-ID.md#22-path
+// See https://github.com/accuknox/spiffe/blob/main/standards/SPIFFE-ID.md#22-path
 func (id ID) AppendSegments(segments ...string) (ID, error) {
 	if id.IsZero() {
 		return ID{}, errors.New("cannot append path segments on a zero ID value")
@@ -192,7 +192,7 @@ func (id ID) AppendSegments(segments ...string) (ID, error) {
 // Replace path returns an ID with the given path in the same trust domain. It
 // will fail if called on a zero value. The given path must be a valid absolute
 // path according to the SPIFFE specification.
-// See https://github.com/spiffe/spiffe/blob/main/standards/SPIFFE-ID.md#22-path
+// See https://github.com/accuknox/spiffe/blob/main/standards/SPIFFE-ID.md#22-path
 func (id ID) ReplacePath(path string) (ID, error) {
 	if id.IsZero() {
 		return ID{}, errors.New("cannot replace path on a zero ID value")
@@ -203,7 +203,7 @@ func (id ID) ReplacePath(path string) (ID, error) {
 // ReplacePathf returns an ID with the formatted path in the same trust domain.
 // It will fail if called on a zero value. The formatted path must be a valid
 // absolute path according to the SPIFFE specification.
-// See https://github.com/spiffe/spiffe/blob/main/standards/SPIFFE-ID.md#22-path
+// See https://github.com/accuknox/spiffe/blob/main/standards/SPIFFE-ID.md#22-path
 func (id ID) ReplacePathf(format string, args ...interface{}) (ID, error) {
 	if id.IsZero() {
 		return ID{}, errors.New("cannot replace path on a zero ID value")
@@ -215,7 +215,7 @@ func (id ID) ReplacePathf(format string, args ...interface{}) (ID, error) {
 // trust domain. It will fail if called on a zero value. The path segments must
 // be valid according to the SPIFFE specification and must not contain path
 // separators.
-// See https://github.com/spiffe/spiffe/blob/main/standards/SPIFFE-ID.md#22-path
+// See https://github.com/accuknox/spiffe/blob/main/standards/SPIFFE-ID.md#22-path
 func (id ID) ReplaceSegments(segments ...string) (ID, error) {
 	if id.IsZero() {
 		return ID{}, errors.New("cannot replace path segments on a zero ID value")

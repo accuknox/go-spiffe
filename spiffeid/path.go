@@ -34,7 +34,7 @@ func JoinPathSegments(segments ...string) (string, error) {
 
 // ValidatePath validates that a path string is a conformant path for a SPIFFE
 // ID.
-// See https://github.com/spiffe/spiffe/blob/main/standards/SPIFFE-ID.md#22-path
+// See https://github.com/accuknox/spiffe/blob/main/standards/SPIFFE-ID.md#22-path
 func ValidatePath(path string) error {
 	switch {
 	case path == "":
@@ -73,7 +73,7 @@ func ValidatePath(path string) error {
 
 // ValidatePathSegment validates that a string is a conformant segment for
 // inclusion in the path for a SPIFFE ID.
-// See https://github.com/spiffe/spiffe/blob/main/standards/SPIFFE-ID.md#22-path
+// See https://github.com/accuknox/spiffe/blob/main/standards/SPIFFE-ID.md#22-path
 func ValidatePathSegment(segment string) error {
 	switch segment {
 	case "":
