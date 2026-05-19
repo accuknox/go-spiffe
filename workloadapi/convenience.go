@@ -11,8 +11,8 @@ import (
 
 // FetchX509SVID fetches the default X509-SVID, i.e. the first in the list
 // returned by the Workload API.
-func FetchX509SVID(ctx context.Context, options ...ClientOption) (*x509svid.SVID, error) {
-	c, err := New(ctx, options...)
+func FetchX509SVID(ctx context.Context, metadata map[string]string, options ...ClientOption) (*x509svid.SVID, error) {
+	c, err := New(ctx, metadata, options...)
 	if err != nil {
 		return nil, err
 	}
@@ -21,8 +21,8 @@ func FetchX509SVID(ctx context.Context, options ...ClientOption) (*x509svid.SVID
 }
 
 // FetchX509SVIDs fetches all X509-SVIDs.
-func FetchX509SVIDs(ctx context.Context, options ...ClientOption) ([]*x509svid.SVID, error) {
-	c, err := New(ctx, options...)
+func FetchX509SVIDs(ctx context.Context, metadata map[string]string, options ...ClientOption) ([]*x509svid.SVID, error) {
+	c, err := New(ctx, metadata, options...)
 	if err != nil {
 		return nil, err
 	}
@@ -31,8 +31,8 @@ func FetchX509SVIDs(ctx context.Context, options ...ClientOption) ([]*x509svid.S
 }
 
 // FetchX509Bundle fetches the X.509 bundles.
-func FetchX509Bundles(ctx context.Context, options ...ClientOption) (*x509bundle.Set, error) {
-	c, err := New(ctx, options...)
+func FetchX509Bundles(ctx context.Context, metadata map[string]string, options ...ClientOption) (*x509bundle.Set, error) {
+	c, err := New(ctx, metadata, options...)
 	if err != nil {
 		return nil, err
 	}
@@ -42,8 +42,8 @@ func FetchX509Bundles(ctx context.Context, options ...ClientOption) (*x509bundle
 
 // FetchX509Context fetches the X.509 context, which contains both X509-SVIDs
 // and X.509 bundles.
-func FetchX509Context(ctx context.Context, options ...ClientOption) (*X509Context, error) {
-	c, err := New(ctx, options...)
+func FetchX509Context(ctx context.Context, metadata map[string]string, options ...ClientOption) (*X509Context, error) {
+	c, err := New(ctx, metadata, options...)
 	if err != nil {
 		return nil, err
 	}
@@ -52,8 +52,8 @@ func FetchX509Context(ctx context.Context, options ...ClientOption) (*X509Contex
 }
 
 // WatchX509Context watches for updates to the X.509 context.
-func WatchX509Context(ctx context.Context, watcher X509ContextWatcher, options ...ClientOption) error {
-	c, err := New(ctx, options...)
+func WatchX509Context(ctx context.Context, metadata map[string]string, watcher X509ContextWatcher, options ...ClientOption) error {
+	c, err := New(ctx, metadata, options...)
 	if err != nil {
 		return err
 	}
@@ -62,8 +62,8 @@ func WatchX509Context(ctx context.Context, watcher X509ContextWatcher, options .
 }
 
 // FetchJWTSVID fetches a JWT-SVID.
-func FetchJWTSVID(ctx context.Context, params jwtsvid.Params, options ...ClientOption) (*jwtsvid.SVID, error) {
-	c, err := New(ctx, options...)
+func FetchJWTSVID(ctx context.Context, params jwtsvid.Params, metadata map[string]string, options ...ClientOption) (*jwtsvid.SVID, error) {
+	c, err := New(ctx, metadata, options...)
 	if err != nil {
 		return nil, err
 	}
@@ -72,8 +72,8 @@ func FetchJWTSVID(ctx context.Context, params jwtsvid.Params, options ...ClientO
 }
 
 // FetchJWTSVID fetches all JWT-SVIDs.
-func FetchJWTSVIDs(ctx context.Context, params jwtsvid.Params, options ...ClientOption) ([]*jwtsvid.SVID, error) {
-	c, err := New(ctx, options...)
+func FetchJWTSVIDs(ctx context.Context, params jwtsvid.Params, metadata map[string]string, options ...ClientOption) ([]*jwtsvid.SVID, error) {
+	c, err := New(ctx, metadata, options...)
 	if err != nil {
 		return nil, err
 	}
@@ -83,8 +83,8 @@ func FetchJWTSVIDs(ctx context.Context, params jwtsvid.Params, options ...Client
 
 // FetchJWTBundles fetches the JWT bundles for JWT-SVID validation, keyed
 // by a SPIFFE ID of the trust domain to which they belong.
-func FetchJWTBundles(ctx context.Context, options ...ClientOption) (*jwtbundle.Set, error) {
-	c, err := New(ctx, options...)
+func FetchJWTBundles(ctx context.Context, metadata map[string]string, options ...ClientOption) (*jwtbundle.Set, error) {
+	c, err := New(ctx, metadata, options...)
 	if err != nil {
 		return nil, err
 	}
@@ -93,8 +93,8 @@ func FetchJWTBundles(ctx context.Context, options ...ClientOption) (*jwtbundle.S
 }
 
 // WatchJWTBundles watches for changes to the JWT bundles.
-func WatchJWTBundles(ctx context.Context, watcher JWTBundleWatcher, options ...ClientOption) error {
-	c, err := New(ctx, options...)
+func WatchJWTBundles(ctx context.Context, watcher JWTBundleWatcher, metadata map[string]string, options ...ClientOption) error {
+	c, err := New(ctx, metadata, options...)
 	if err != nil {
 		return err
 	}
@@ -103,8 +103,8 @@ func WatchJWTBundles(ctx context.Context, watcher JWTBundleWatcher, options ...C
 }
 
 // WatchX509Bundles watches for changes to the X.509 bundles.
-func WatchX509Bundles(ctx context.Context, watcher X509BundleWatcher, options ...ClientOption) error {
-	c, err := New(ctx, options...)
+func WatchX509Bundles(ctx context.Context, watcher X509BundleWatcher, metadata map[string]string, options ...ClientOption) error {
+	c, err := New(ctx, metadata, options...)
 	if err != nil {
 		return err
 	}
@@ -114,8 +114,8 @@ func WatchX509Bundles(ctx context.Context, watcher X509BundleWatcher, options ..
 
 // ValidateJWTSVID validates the JWT-SVID token. The parsed and validated
 // JWT-SVID is returned.
-func ValidateJWTSVID(ctx context.Context, token, audience string, options ...ClientOption) (*jwtsvid.SVID, error) {
-	c, err := New(ctx, options...)
+func ValidateJWTSVID(ctx context.Context, token, audience string, metadata map[string]string, options ...ClientOption) (*jwtsvid.SVID, error) {
+	c, err := New(ctx, metadata, options...)
 	if err != nil {
 		return nil, err
 	}

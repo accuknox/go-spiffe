@@ -37,7 +37,7 @@ func ExampleMTLSServerConfig_workloadAPISource() {
 		// TODO: error handling
 	}
 
-	source, err := workloadapi.NewX509Source(context.Background())
+	source, err := workloadapi.NewX509Source(context.Background(), nil)
 	if err != nil {
 		// TODO: handle error
 	}

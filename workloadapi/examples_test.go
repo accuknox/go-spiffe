@@ -9,7 +9,7 @@ import (
 )
 
 func ExampleFetchX509SVID() {
-	svid, err := workloadapi.FetchX509SVID(context.TODO())
+	svid, err := workloadapi.FetchX509SVID(context.TODO(), nil)
 	if err != nil {
 		// TODO: error handling
 	}
@@ -26,7 +26,7 @@ func ExampleFetchJWTSVID() {
 
 	svid, err := workloadapi.FetchJWTSVID(context.TODO(), jwtsvid.Params{
 		Audience: serverID.String(),
-	})
+	}, nil)
 	if err != nil {
 		// TODO: error handling
 	}
@@ -42,7 +42,7 @@ func ExampleValidateJWTSVID() {
 	}
 
 	token := "TODO"
-	svid, err := workloadapi.ValidateJWTSVID(context.TODO(), token, serverID.String())
+	svid, err := workloadapi.ValidateJWTSVID(context.TODO(), token, serverID.String(), nil)
 	if err != nil {
 		// TODO: error handling
 	}

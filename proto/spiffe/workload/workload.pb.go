@@ -27,7 +27,7 @@ const (
 // request.
 type X509SVIDRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Metadata      *structpb.Struct       `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	Metadata      map[string]string      `protobuf:"bytes,1,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -62,7 +62,7 @@ func (*X509SVIDRequest) Descriptor() ([]byte, []int) {
 	return file_workload_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *X509SVIDRequest) GetMetadata() *structpb.Struct {
+func (x *X509SVIDRequest) GetMetadata() map[string]string {
 	if x != nil {
 		return x.Metadata
 	}
@@ -230,7 +230,7 @@ func (x *X509SVID) GetHint() string {
 // request.
 type X509BundlesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Metadata      *structpb.Struct       `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	Metadata      map[string]string      `protobuf:"bytes,1,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -265,7 +265,7 @@ func (*X509BundlesRequest) Descriptor() ([]byte, []int) {
 	return file_workload_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *X509BundlesRequest) GetMetadata() *structpb.Struct {
+func (x *X509BundlesRequest) GetMetadata() map[string]string {
 	if x != nil {
 		return x.Metadata
 	}
@@ -702,9 +702,12 @@ var File_workload_proto protoreflect.FileDescriptor
 
 const file_workload_proto_rawDesc = "" +
 	"\n" +
-	"\x0eworkload.proto\x1a\x1cgoogle/protobuf/struct.proto\"F\n" +
-	"\x0fX509SVIDRequest\x123\n" +
-	"\bmetadata\x18\x01 \x01(\v2\x17.google.protobuf.StructR\bmetadata\"\xe0\x01\n" +
+	"\x0eworkload.proto\x1a\x1cgoogle/protobuf/struct.proto\"\x8a\x01\n" +
+	"\x0fX509SVIDRequest\x12:\n" +
+	"\bmetadata\x18\x01 \x03(\v2\x1e.X509SVIDRequest.MetadataEntryR\bmetadata\x1a;\n" +
+	"\rMetadataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xe0\x01\n" +
 	"\x10X509SVIDResponse\x12\x1f\n" +
 	"\x05svids\x18\x01 \x03(\v2\t.X509SVIDR\x05svids\x12\x10\n" +
 	"\x03crl\x18\x02 \x03(\fR\x03crl\x12T\n" +
@@ -717,9 +720,12 @@ const file_workload_proto_rawDesc = "" +
 	"\tx509_svid\x18\x02 \x01(\fR\bx509Svid\x12\"\n" +
 	"\rx509_svid_key\x18\x03 \x01(\fR\vx509SvidKey\x12\x16\n" +
 	"\x06bundle\x18\x04 \x01(\fR\x06bundle\x12\x12\n" +
-	"\x04hint\x18\x05 \x01(\tR\x04hint\"I\n" +
-	"\x12X509BundlesRequest\x123\n" +
-	"\bmetadata\x18\x01 \x01(\v2\x17.google.protobuf.StructR\bmetadata\"\xa0\x01\n" +
+	"\x04hint\x18\x05 \x01(\tR\x04hint\"\x90\x01\n" +
+	"\x12X509BundlesRequest\x12=\n" +
+	"\bmetadata\x18\x01 \x03(\v2!.X509BundlesRequest.MetadataEntryR\bmetadata\x1a;\n" +
+	"\rMetadataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xa0\x01\n" +
 	"\x13X509BundlesResponse\x12\x10\n" +
 	"\x03crl\x18\x01 \x03(\fR\x03crl\x12;\n" +
 	"\abundles\x18\x02 \x03(\v2!.X509BundlesResponse.BundlesEntryR\abundles\x1a:\n" +
@@ -766,7 +772,7 @@ func file_workload_proto_rawDescGZIP() []byte {
 	return file_workload_proto_rawDescData
 }
 
-var file_workload_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_workload_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_workload_proto_goTypes = []any{
 	(*X509SVIDRequest)(nil),         // 0: X509SVIDRequest
 	(*X509SVIDResponse)(nil),        // 1: X509SVIDResponse
@@ -780,20 +786,22 @@ var file_workload_proto_goTypes = []any{
 	(*JWTBundlesResponse)(nil),      // 9: JWTBundlesResponse
 	(*ValidateJWTSVIDRequest)(nil),  // 10: ValidateJWTSVIDRequest
 	(*ValidateJWTSVIDResponse)(nil), // 11: ValidateJWTSVIDResponse
-	nil,                             // 12: X509SVIDResponse.FederatedBundlesEntry
-	nil,                             // 13: X509BundlesResponse.BundlesEntry
-	nil,                             // 14: JWTBundlesResponse.BundlesEntry
-	(*structpb.Struct)(nil),         // 15: google.protobuf.Struct
+	nil,                             // 12: X509SVIDRequest.MetadataEntry
+	nil,                             // 13: X509SVIDResponse.FederatedBundlesEntry
+	nil,                             // 14: X509BundlesRequest.MetadataEntry
+	nil,                             // 15: X509BundlesResponse.BundlesEntry
+	nil,                             // 16: JWTBundlesResponse.BundlesEntry
+	(*structpb.Struct)(nil),         // 17: google.protobuf.Struct
 }
 var file_workload_proto_depIdxs = []int32{
-	15, // 0: X509SVIDRequest.metadata:type_name -> google.protobuf.Struct
+	12, // 0: X509SVIDRequest.metadata:type_name -> X509SVIDRequest.MetadataEntry
 	2,  // 1: X509SVIDResponse.svids:type_name -> X509SVID
-	12, // 2: X509SVIDResponse.federated_bundles:type_name -> X509SVIDResponse.FederatedBundlesEntry
-	15, // 3: X509BundlesRequest.metadata:type_name -> google.protobuf.Struct
-	13, // 4: X509BundlesResponse.bundles:type_name -> X509BundlesResponse.BundlesEntry
+	13, // 2: X509SVIDResponse.federated_bundles:type_name -> X509SVIDResponse.FederatedBundlesEntry
+	14, // 3: X509BundlesRequest.metadata:type_name -> X509BundlesRequest.MetadataEntry
+	15, // 4: X509BundlesResponse.bundles:type_name -> X509BundlesResponse.BundlesEntry
 	7,  // 5: JWTSVIDResponse.svids:type_name -> JWTSVID
-	14, // 6: JWTBundlesResponse.bundles:type_name -> JWTBundlesResponse.BundlesEntry
-	15, // 7: ValidateJWTSVIDResponse.claims:type_name -> google.protobuf.Struct
+	16, // 6: JWTBundlesResponse.bundles:type_name -> JWTBundlesResponse.BundlesEntry
+	17, // 7: ValidateJWTSVIDResponse.claims:type_name -> google.protobuf.Struct
 	0,  // 8: SpiffeWorkloadAPI.FetchX509SVID:input_type -> X509SVIDRequest
 	3,  // 9: SpiffeWorkloadAPI.FetchX509Bundles:input_type -> X509BundlesRequest
 	5,  // 10: SpiffeWorkloadAPI.FetchJWTSVID:input_type -> JWTSVIDRequest
@@ -822,7 +830,7 @@ func file_workload_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_workload_proto_rawDesc), len(file_workload_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   15,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -25,7 +25,7 @@ func TestX509SourceDoesNotReturnUntilInitialUpdate(t *testing.T) {
 	defer cancel()
 
 	// Create the source. It will wait for the initial response.
-	source, err := workloadapi.NewX509Source(ctx, withAddr(api))
+	source, err := workloadapi.NewX509Source(ctx, nil, withAddr(api))
 	if !assert.EqualError(t, err, context.DeadlineExceeded.Error()) {
 		source.Close()
 	}
@@ -49,7 +49,7 @@ func TestX509SourceFailsCallsIfClosed(t *testing.T) {
 	})
 
 	// Create the source. It will wait for the initial response.
-	source, err := workloadapi.NewX509Source(ctx, withAddr(api))
+	source, err := workloadapi.NewX509Source(ctx, nil, withAddr(api))
 	require.NoError(t, err)
 
 	// Close the source
@@ -88,7 +88,7 @@ func TestX509SourceGetsUpdates(t *testing.T) {
 	})
 
 	// Create the source. It will wait for the initial response.
-	source, err := workloadapi.NewX509Source(ctx, withAddr(api))
+	source, err := workloadapi.NewX509Source(ctx, nil, withAddr(api))
 	require.NoError(t, err)
 	defer func() {
 		assert.NoError(t, source.Close())
@@ -146,7 +146,7 @@ func TestX509SourceX509SVIDPicker(t *testing.T) {
 	})
 
 	// Create the source. It will wait for the initial response.
-	source, err := workloadapi.NewX509Source(ctx, withAddr(api),
+	source, err := workloadapi.NewX509Source(ctx, nil, withAddr(api),
 		workloadapi.WithDefaultX509SVIDPicker(func(svids []*x509svid.SVID) *x509svid.SVID {
 			for _, svid := range svids {
 				if svid.ID == svid2.ID {

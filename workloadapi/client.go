@@ -22,7 +22,6 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
-	"google.golang.org/protobuf/types/known/structpb"
 )
 
 const (
@@ -35,13 +34,15 @@ type Client struct {
 	conn     *grpc.ClientConn
 	wlClient workload.SpiffeWorkloadAPIClient
 	config   clientConfig
+	metadata map[string]string
 }
 
 // New dials the Workload API and returns a client. The client should be closed
 // when no longer in use to free underlying resources.
-func New(ctx context.Context, options ...ClientOption) (*Client, error) {
+func New(ctx context.Context, metadata map[string]string, options ...ClientOption) (*Client, error) {
 	c := &Client{
-		config: defaultClientConfig(),
+		config:   defaultClientConfig(),
+		metadata: metadata,
 	}
 	for _, opt := range options {
 		opt.configureClient(&c.config)
@@ -72,13 +73,10 @@ func (c *Client) FetchX509SVID(ctx context.Context) (*x509svid.SVID, error) {
 	ctx, cancel := context.WithCancel(withHeader(ctx))
 	defer cancel()
 
-	metadata, err := c.updateMetadata()
-	if err != nil {
-		return nil, err
-	}
+	c.updateMetadata()
 
 	stream, err := c.wlClient.FetchX509SVID(ctx, &workload.X509SVIDRequest{
-		Metadata: metadata,
+		Metadata: c.config.metadata,
 	})
 	if err != nil {
 		return nil, err
@@ -102,13 +100,10 @@ func (c *Client) FetchX509SVIDs(ctx context.Context) ([]*x509svid.SVID, error) {
 	ctx, cancel := context.WithCancel(withHeader(ctx))
 	defer cancel()
 
-	metadata, err := c.updateMetadata()
-	if err != nil {
-		return nil, err
-	}
+	c.updateMetadata()
 
 	stream, err := c.wlClient.FetchX509SVID(ctx, &workload.X509SVIDRequest{
-		Metadata: metadata,
+		Metadata: c.config.metadata,
 	})
 	if err != nil {
 		return nil, err
@@ -127,13 +122,10 @@ func (c *Client) FetchX509Bundles(ctx context.Context) (*x509bundle.Set, error) 
 	ctx, cancel := context.WithCancel(withHeader(ctx))
 	defer cancel()
 
-	metadata, err := c.updateMetadata()
-	if err != nil {
-		return nil, err
-	}
+	c.updateMetadata()
 
 	stream, err := c.wlClient.FetchX509Bundles(ctx, &workload.X509BundlesRequest{
-		Metadata: metadata,
+		Metadata: c.config.metadata,
 	})
 	if err != nil {
 		return nil, err
@@ -166,13 +158,10 @@ func (c *Client) FetchX509Context(ctx context.Context) (*X509Context, error) {
 	ctx, cancel := context.WithCancel(withHeader(ctx))
 	defer cancel()
 
-	metadata, err := c.updateMetadata()
-	if err != nil {
-		return nil, err
-	}
+	c.updateMetadata()
 
 	stream, err := c.wlClient.FetchX509SVID(ctx, &workload.X509SVIDRequest{
-		Metadata: metadata,
+		Metadata: c.config.metadata,
 	})
 	if err != nil {
 		return nil, err
@@ -322,14 +311,11 @@ func (c *Client) watchX509Context(ctx context.Context, watcher X509ContextWatche
 	ctx, cancel := context.WithCancel(withHeader(ctx))
 	defer cancel()
 
-	metadata, err := c.updateMetadata()
-	if err != nil {
-		return err
-	}
+	c.updateMetadata()
 
 	c.config.log.Debugf("Watching X.509 contexts")
 	stream, err := c.wlClient.FetchX509SVID(ctx, &workload.X509SVIDRequest{
-		Metadata: metadata,
+		Metadata: c.config.metadata,
 	})
 	if err != nil {
 		return err
@@ -383,14 +369,11 @@ func (c *Client) watchX509Bundles(ctx context.Context, watcher X509BundleWatcher
 	ctx, cancel := context.WithCancel(withHeader(ctx))
 	defer cancel()
 
-	metadata, err := c.updateMetadata()
-	if err != nil {
-		return err
-	}
+	c.updateMetadata()
 
 	c.config.log.Debugf("Watching X.509 bundles")
 	stream, err := c.wlClient.FetchX509Bundles(ctx, &workload.X509BundlesRequest{
-		Metadata: metadata,
+		Metadata: c.config.metadata,
 	})
 	if err != nil {
 		return err
@@ -624,17 +607,24 @@ func fetchServiceAccountToken(path string) (string, error) {
 	return strings.TrimSpace(string(token)), nil
 }
 
-func (c *Client) updateMetadata() (*structpb.Struct, error) {
+func (c *Client) updateMetadata() {
 	if len(c.config.metadata) <= 0 {
-		c.config.metadata = make(map[string]any)
+		c.config.metadata = make(map[string]string)
 	}
 
-	if path, ok := c.config.metadata[sa_path_key].(string); ok {
+	path := c.metadata[sa_path_key]
+	if path != "" {
+		c.config.metadata[sa_path_key] = path
+	}
+
+	if path, ok := c.config.metadata[sa_path_key]; ok {
 		if token, err := fetchServiceAccountToken(path); err == nil {
 			c.config.metadata[sa_token_key] = token
 		}
 	}
 
-	return structpb.NewStruct(c.config.metadata)
+	if c.config.metadata[sa_token_key] == "" && c.metadata[sa_token_key] != "" {
+		c.config.metadata[sa_token_key] = c.metadata[sa_token_key]
+	}
 
 }

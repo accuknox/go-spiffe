@@ -502,22 +502,22 @@ func setupTestEnv(t *testing.T) (*testEnv, func()) {
 		}
 	}()
 	testEnv.wlCancel = wlCancel
-	testEnv.wlAPIClientA, testEnv.err = workloadapi.New(wlCtx, workloadapi.WithAddr(testEnv.wlAPIServerA.Addr()))
+	testEnv.wlAPIClientA, testEnv.err = workloadapi.New(wlCtx, nil, workloadapi.WithAddr(testEnv.wlAPIServerA.Addr()))
 	if testEnv.err != nil {
 		cleanup()
 	}
-	testEnv.wlAPISourceA, testEnv.err = workloadapi.NewX509Source(wlCtx, workloadapi.WithClient(testEnv.wlAPIClientA))
+	testEnv.wlAPISourceA, testEnv.err = workloadapi.NewX509Source(wlCtx, nil, workloadapi.WithClient(testEnv.wlAPIClientA))
 	if testEnv.err != nil {
 		cleanup()
 	}
 
 	// Create custom workload API sources for the client
-	testEnv.wlAPIClientB, testEnv.err = workloadapi.New(wlCtx, workloadapi.WithAddr(testEnv.wlAPIServerB.Addr()))
+	testEnv.wlAPIClientB, testEnv.err = workloadapi.New(wlCtx, nil, workloadapi.WithAddr(testEnv.wlAPIServerB.Addr()))
 	if testEnv.err != nil {
 		cleanup()
 	}
 
-	testEnv.wlAPISourceB, testEnv.err = workloadapi.NewX509Source(wlCtx, workloadapi.WithClient(testEnv.wlAPIClientB))
+	testEnv.wlAPISourceB, testEnv.err = workloadapi.NewX509Source(wlCtx, nil, workloadapi.WithClient(testEnv.wlAPIClientB))
 	if testEnv.err != nil {
 		cleanup()
 	}

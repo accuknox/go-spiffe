@@ -44,7 +44,7 @@ func WithBackoffStrategy(backoffStrategy BackoffStrategy) ClientOption {
 	})
 }
 
-func WithMetadata(data map[string]any) ClientOption {
+func WithMetadata(data map[string]string) ClientOption {
 	return clientOption(func(c *clientConfig) {
 		c.metadata = data
 	})
@@ -109,7 +109,7 @@ type clientConfig struct {
 	dialOptions     []grpc.DialOption
 	log             logger.Logger
 	backoffStrategy BackoffStrategy
-	metadata        map[string]any
+	metadata        map[string]string
 }
 
 type clientOption func(*clientConfig)

@@ -34,7 +34,7 @@ func run(ctx context.Context) error {
 	clientOptions := workloadapi.WithClientOptions(workloadapi.WithAddr(socketPath))
 
 	// Create an X509Source struct to fetch the trust bundle as needed to verify the X509-SVID presented by the server.
-	x509Source, err := workloadapi.NewX509Source(ctx, clientOptions)
+	x509Source, err := workloadapi.NewX509Source(ctx, nil, clientOptions)
 	if err != nil {
 		return fmt.Errorf("unable to create X509Source: %w", err)
 	}

@@ -65,6 +65,7 @@ func run(ctx context.Context) error {
 	// Create an X509Source for the server's TLS configuration.
 	x509Source, err := workloadapi.NewX509Source(
 		ctx,
+		nil,
 		clientOptions,
 	)
 	if err != nil {

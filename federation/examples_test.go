@@ -137,7 +137,7 @@ func ExampleHandler_sPIFFEAuth() {
 	}
 
 	// Create an X.509 source for obtaining the server X509-SVID
-	x509Source, err := workloadapi.NewX509Source(context.TODO())
+	x509Source, err := workloadapi.NewX509Source(context.TODO(), nil)
 	if err != nil {
 		// TODO: handle error
 	}
