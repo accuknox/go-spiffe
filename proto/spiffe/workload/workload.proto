@@ -42,7 +42,7 @@ service SpiffeWorkloadAPI {
 // We can pass any to the server to specify which SPIFFE IDs to
 // request.
 message X509SVIDRequest { 
-    google.protobuf.Struct metadata = 1;
+    map<string,string> metadata = 1;
 }
 
 // The X509SVIDResponse message carries X.509-SVIDs and related information,
@@ -89,7 +89,7 @@ message X509SVID {
 // bundles. We can pass any to the server to specify which SPIFFE IDs to
 // request.
 message X509BundlesRequest {
-    google.protobuf.Struct metadata = 1;
+    map<string,string> metadata = 1;
 }
 
 // The X509BundlesResponse message carries a set of global CRLs and a map of

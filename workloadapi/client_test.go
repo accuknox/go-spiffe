@@ -34,7 +34,7 @@ func TestFetchX509SVID(t *testing.T) {
 	ca := test.NewCA(t, td)
 	wl := fakeworkloadapi.New(t)
 	defer wl.Stop()
-	c, err := New(context.Background(), WithAddr(wl.Addr()))
+	c, err := New(context.Background(), nil, WithAddr(wl.Addr()))
 	require.NoError(t, err)
 	defer c.Close()
 	hint := "internal usage"
@@ -55,7 +55,7 @@ func TestFetchX509SVIDs(t *testing.T) {
 	ca := test.NewCA(t, td)
 	wl := fakeworkloadapi.New(t)
 	defer wl.Stop()
-	c, err := New(context.Background(), WithAddr(wl.Addr()))
+	c, err := New(context.Background(), nil, WithAddr(wl.Addr()))
 	require.NoError(t, err)
 	defer c.Close()
 
@@ -87,7 +87,7 @@ func TestFetchX509Bundles(t *testing.T) {
 	federatedCA := test.NewCA(t, federatedTD)
 	wl := fakeworkloadapi.New(t)
 	defer wl.Stop()
-	c, err := New(context.Background(), WithAddr(wl.Addr()))
+	c, err := New(context.Background(), nil, WithAddr(wl.Addr()))
 	require.NoError(t, err)
 	defer c.Close()
 
@@ -107,7 +107,7 @@ func TestWatchX509Bundles(t *testing.T) {
 
 	backoffStrategy := &testBackoffStrategy{}
 
-	c, err := New(context.Background(), WithAddr(wl.Addr()), WithBackoffStrategy(backoffStrategy))
+	c, err := New(context.Background(), nil, WithAddr(wl.Addr()), WithBackoffStrategy(backoffStrategy))
 	require.NoError(t, err)
 	defer c.Close()
 
@@ -163,7 +163,7 @@ func TestFetchX509Context(t *testing.T) {
 	federatedCA := test.NewCA(t, federatedTD)
 	wl := fakeworkloadapi.New(t)
 	defer wl.Stop()
-	c, err := New(context.Background(), WithAddr(wl.Addr()))
+	c, err := New(context.Background(), nil, WithAddr(wl.Addr()))
 	require.NoError(t, err)
 	defer c.Close()
 
@@ -223,7 +223,7 @@ func TestWatchX509Context(t *testing.T) {
 
 	backoffStrategy := &testBackoffStrategy{}
 
-	c, err := New(context.Background(), WithAddr(wl.Addr()), WithBackoffStrategy(backoffStrategy))
+	c, err := New(context.Background(), nil, WithAddr(wl.Addr()), WithBackoffStrategy(backoffStrategy))
 	require.NoError(t, err)
 	defer c.Close()
 
@@ -310,7 +310,7 @@ func TestFetchJWTSVID(t *testing.T) {
 	ca := test.NewCA(t, td)
 	wl := fakeworkloadapi.New(t)
 	defer wl.Stop()
-	c, _ := New(context.Background(), WithAddr(wl.Addr()))
+	c, _ := New(context.Background(), nil, WithAddr(wl.Addr()))
 	defer c.Close()
 
 	subjectID := spiffeid.RequireFromPath(td, "/subject")
@@ -336,7 +336,7 @@ func TestFetchJWTSVIDs(t *testing.T) {
 	ca := test.NewCA(t, td)
 	wl := fakeworkloadapi.New(t)
 	defer wl.Stop()
-	c, _ := New(context.Background(), WithAddr(wl.Addr()))
+	c, _ := New(context.Background(), nil, WithAddr(wl.Addr()))
 	defer c.Close()
 
 	subjectID := spiffeid.RequireFromPath(td, "/subject")
@@ -373,7 +373,7 @@ func TestFetchJWTBundles(t *testing.T) {
 	ca := test.NewCA(t, td)
 	wl := fakeworkloadapi.New(t)
 	defer wl.Stop()
-	c, err := New(context.Background(), WithAddr(wl.Addr()))
+	c, err := New(context.Background(), nil, WithAddr(wl.Addr()))
 	require.NoError(t, err)
 	defer c.Close()
 
@@ -391,7 +391,7 @@ func TestWatchJWTBundles(t *testing.T) {
 
 	backoffStrategy := &testBackoffStrategy{}
 
-	c, err := New(context.Background(), WithAddr(wl.Addr()), WithBackoffStrategy(backoffStrategy))
+	c, err := New(context.Background(), nil, WithAddr(wl.Addr()), WithBackoffStrategy(backoffStrategy))
 	require.NoError(t, err)
 	defer c.Close()
 
@@ -446,7 +446,7 @@ func TestValidateJWTSVID(t *testing.T) {
 	ca := test.NewCA(t, td)
 	wl := fakeworkloadapi.New(t)
 	defer wl.Stop()
-	c, err := New(context.Background(), WithAddr(wl.Addr()))
+	c, err := New(context.Background(), nil, WithAddr(wl.Addr()))
 	require.NoError(t, err)
 	defer c.Close()
 

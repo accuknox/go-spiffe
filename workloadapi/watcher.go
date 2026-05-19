@@ -44,7 +44,7 @@ type watcher struct {
 	jwtBundlesSetOnce sync.Once
 }
 
-func newWatcher(ctx context.Context, config watcherConfig, x509ContextFn func(*X509Context), jwtBundlesFn func(*jwtbundle.Set)) (_ *watcher, err error) {
+func newWatcher(ctx context.Context, config watcherConfig, metadata map[string]string, x509ContextFn func(*X509Context), jwtBundlesFn func(*jwtbundle.Set)) (_ *watcher, err error) {
 	w := &watcher{
 		updatedCh:      make(chan struct{}, 1),
 		client:         config.client,
@@ -64,7 +64,7 @@ func newWatcher(ctx context.Context, config watcherConfig, x509ContextFn func(*X
 
 	// Initialize a new client unless one is provided by the options
 	if w.client == nil {
-		client, err := New(ctx, config.clientOptions...)
+		client, err := New(ctx, metadata, config.clientOptions...)
 		if err != nil {
 			return nil, err
 		}

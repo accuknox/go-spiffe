@@ -62,7 +62,7 @@ func NewListenerWithMode(ctx context.Context, inner net.Listener, mode ListenMod
 	if !m.sourceUnneeded {
 		source := m.source
 		if source == nil {
-			source, err = workloadapi.NewX509Source(ctx, m.options...)
+			source, err = workloadapi.NewX509Source(ctx, nil, m.options...)
 			if err != nil {
 				return nil, wrapSpiffetlsErr(fmt.Errorf("cannot create X.509 source: %w", err))
 			}

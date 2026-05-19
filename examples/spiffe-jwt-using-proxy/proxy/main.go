@@ -37,6 +37,7 @@ func run(ctx context.Context) error {
 	// to the client.
 	x509Source, err := workloadapi.NewX509Source(
 		ctx,
+		nil,
 		workloadapi.WithClientOptions(workloadapi.WithAddr(socketPath)),
 	)
 	if err != nil {

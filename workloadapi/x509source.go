@@ -28,7 +28,7 @@ type X509Source struct {
 // NewX509Source creates a new X509Source. It blocks until the initial update
 // has been received from the Workload API. The source should be closed when
 // no longer in use to free underlying resources.
-func NewX509Source(ctx context.Context, options ...X509SourceOption) (_ *X509Source, err error) {
+func NewX509Source(ctx context.Context, metadata map[string]string, options ...X509SourceOption) (_ *X509Source, err error) {
 	config := &x509SourceConfig{}
 	for _, option := range options {
 		option.configureX509Source(config)
@@ -38,7 +38,7 @@ func NewX509Source(ctx context.Context, options ...X509SourceOption) (_ *X509Sou
 		picker: config.picker,
 	}
 
-	s.watcher, err = newWatcher(ctx, config.watcher, s.setX509Context, nil)
+	s.watcher, err = newWatcher(ctx, config.watcher, metadata, s.setX509Context, nil)
 	if err != nil {
 		return nil, err
 	}

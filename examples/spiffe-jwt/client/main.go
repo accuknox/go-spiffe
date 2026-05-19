@@ -36,7 +36,7 @@ func run(ctx context.Context) error {
 	clientOptions := workloadapi.WithClientOptions(workloadapi.WithAddr(socketPath))
 
 	// Create X509 source to fetch bundle certificate used to verify presented certificate from server
-	x509Source, err := workloadapi.NewX509Source(ctx, clientOptions)
+	x509Source, err := workloadapi.NewX509Source(ctx, nil, clientOptions)
 	if err != nil {
 		return fmt.Errorf("unable to create X509Source: %w", err)
 	}
