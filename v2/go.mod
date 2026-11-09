@@ -1,29 +1,21 @@
 module github.com/accuknox/go-spiffe/v2
 
-go 1.17
+go 1.26.0
 
 require (
-	github.com/Microsoft/go-winio v0.6.0
-	github.com/go-jose/go-jose/v3 v3.0.0
-	github.com/stretchr/testify v1.8.2
-	github.com/zeebo/errs v1.3.0
-	google.golang.org/grpc v1.53.0
-	google.golang.org/grpc/examples v0.0.0-20230228013124-7437662fd5b8
-	google.golang.org/protobuf v1.28.1
+	github.com/Microsoft/go-winio v0.6.2
+	github.com/go-jose/go-jose/v4 v4.1.6
+	github.com/stretchr/testify v1.12.1
+	github.com/zeebo/errs v1.4.0
+	google.golang.org/grpc v1.84.0
+	google.golang.org/grpc/examples v0.0.0-20261104142343-cbf30c413099
+	google.golang.org/protobuf v1.36.12
 )
 
 require (
-	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/golang/protobuf v1.5.2 // indirect
-	github.com/kr/pretty v0.1.0 // indirect
-	github.com/pmezard/go-difflib v1.0.0 // indirect
-	golang.org/x/crypto v0.0.0-20211108221036-ceb1ce70b4fa // indirect
-	golang.org/x/mod v0.7.0 // indirect
-	golang.org/x/net v0.5.0 // indirect
-	golang.org/x/sys v0.4.0 // indirect
-	golang.org/x/text v0.6.0 // indirect
-	golang.org/x/tools v0.3.0 // indirect
-	google.golang.org/genproto v0.0.0-20230110181048-76db0878b65f // indirect
-	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
-	gopkg.in/yaml.v3 v3.0.1 // indirect
+	go.yaml.in/yaml/v3 v3.0.5 // indirect
+	golang.org/x/net v0.60.0 // indirect
+	golang.org/x/sys v0.49.0 // indirect
+	golang.org/x/text v0.42.0 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20260921155816-b14227669459 // indirect
 )

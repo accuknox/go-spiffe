@@ -9,7 +9,7 @@ import (
 
 	"github.com/accuknox/go-spiffe/v2/internal/jwtutil"
 	"github.com/accuknox/go-spiffe/v2/spiffeid"
-	"github.com/go-jose/go-jose/v3"
+	"github.com/go-jose/go-jose/v4"
 	"github.com/zeebo/errs"
 )
 
