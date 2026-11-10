@@ -6,13 +6,24 @@ import (
 
 	"github.com/accuknox/go-spiffe/v2/bundle/jwtbundle"
 	"github.com/accuknox/go-spiffe/v2/spiffeid"
-	"github.com/go-jose/go-jose/v3"
-	"github.com/go-jose/go-jose/v3/jwt"
+	"github.com/go-jose/go-jose/v4"
+	"github.com/go-jose/go-jose/v4/jwt"
 	"github.com/zeebo/errs"
 )
 
 var (
-	jwtsvidErr = errs.Class("jwtsvid")
+	jwtsvidErr                 = errs.Class("jwtsvid")
+	allowedSignatureAlgorithms = []jose.SignatureAlgorithm{
+		jose.RS256,
+		jose.RS384,
+		jose.RS512,
+		jose.ES256,
+		jose.ES384,
+		jose.ES512,
+		jose.PS256,
+		jose.PS384,
+		jose.PS512,
+	}
 )
 
 // tokenValidator validates the token and returns the claims
@@ -87,7 +98,7 @@ func (svid *SVID) Marshal() string {
 
 func parse(token string, audience []string, getClaims tokenValidator) (*SVID, error) {
 	// Parse serialized token
-	tok, err := jwt.ParseSigned(token)
+	tok, err := jwt.ParseSigned(token,allowedSignatureAlgorithms)
 	if err != nil {
 		return nil, jwtsvidErr.New("unable to parse JWT token")
 	}
@@ -124,7 +135,7 @@ func parse(token string, audience []string, getClaims tokenValidator) (*SVID, er
 
 	// Validate the standard claims.
 	if err := claims.Validate(jwt.Expected{
-		Audience: audience,
+		AnyAudience: audience,
 		Time:     time.Now(),
 	}); err != nil {
 		// Convert expected validation errors for pretty errors
