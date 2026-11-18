@@ -86,6 +86,8 @@ func (s *X509Source) GetX509BundleForTrustDomain(trustDomain spiffeid.TrustDomai
 		return nil, err
 	}
 
+	s.mtx.RLock()
+	defer s.mtx.RUnlock()
 	return s.bundles.GetX509BundleForTrustDomain(trustDomain)
 }
 
